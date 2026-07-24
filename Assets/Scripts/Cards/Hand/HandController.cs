@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 // I dont care no commends because game jam :)
 // Ryan made this its to display the hand
@@ -12,17 +14,25 @@ public class HandController : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool enableDebugSpawn = false;
-    [SerializeField] private int startingCards = 5;
+    [SerializeField] private int startingCards = 0;
+
+    [Header("Events")]
+    public UnityEvent onHandEmptied;
+
+    // Pass the function to play the current cards in hand here
+    // maybe change later to be less confusing?
+    public Func<CardData, bool> PlayHandler;
 
     private readonly List<CardView> cards = new List<CardView>();
     public IReadOnlyList<CardView> Cards => cards;
+    public int Count => cards.Count;
 
     private void Start()
     {
         if (enableDebugSpawn)
         {
             for (int i = 0; i < startingCards; i++)
-                AddCard();
+                AddCard((CardData)null);
         }
 
         ApplyLayout(snap: true);
@@ -33,12 +43,13 @@ public class HandController : MonoBehaviour
         ApplyLayout(snap: false);
     }
 
-    public CardView AddCard()
+    public CardView AddCard(CardData data)
     {
         CardView card = Instantiate(cardPrefab, transform);
         card.Init(this, cardSettings);
+        card.SetData(data);
         cards.Add(card);
-        ApplyLayout(snap: false);
+        ApplyLayout(snap: true);
         return card;
     }
 
@@ -49,6 +60,28 @@ public class HandController : MonoBehaviour
             Destroy(card.gameObject);
             ApplyLayout(snap: false);
         }
+    }
+
+    public List<CardData> RemoveAllCards()
+    {
+        List<CardData> datas = new List<CardData>();
+        foreach (CardView card in cards)
+        {
+            if (card.Data != null) datas.Add(card.Data);
+            Destroy(card.gameObject);
+        }
+        cards.Clear();
+        return datas;
+    }
+
+    public void RequestPlay(CardView card)
+    {
+        if (PlayHandler == null || card.Data == null) return;
+        if (!PlayHandler(card.Data)) return;
+
+        RemoveCard(card);
+        if (cards.Count == 0)
+            onHandEmptied.Invoke();
     }
 
     public void ApplyLayout(bool snap)
@@ -94,14 +127,5 @@ public class HandController : MonoBehaviour
                          (Vector3)handSettings.centerOffset -
                          Vector3.up * handSettings.fanRadius;
         Handles.DrawWireDisc(center, Vector3.forward, handSettings.fanRadius);
-    }
-
-    [ContextMenu("Add Test Card")]
-    private void AddTestCard() => AddCard();
-
-    [ContextMenu("Remove Last Card")]
-    private void RemoveLastCard()
-    {
-        if (cards.Count > 0) RemoveCard(cards[cards.Count - 1]);
     }
 }

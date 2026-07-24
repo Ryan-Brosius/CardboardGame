@@ -1,11 +1,23 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 [RequireComponent(typeof(CanvasGroup))]
 public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public static bool AnyCardDragging { get; private set; }
+
+    // someone pls figure out how to do this later
+    [Header("DEBUG FOR NOW SO I UNDERSTAND THE CARDS WITH NO ART")]
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text descriptionText;
+
+    [Header("Play Zone Hooks")]
+    public UnityEvent onEnterPlayZone;
+    public UnityEvent onExitPlayZone;
 
     private CardSettings settings;
     private HandController hand;
@@ -32,6 +44,8 @@ public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private float tiltVelocity;
     private Vector2 lastPosition;
 
+    public CardData Data { get; private set; }
+    public bool IsInPlayZone { get; private set; }
     public int SlotIndex => slotIndex;
     public bool IsElevated => elevated;
 
@@ -43,6 +57,14 @@ public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
         rect.pivot = new Vector2(0.5f, 0.5f);
+    }
+
+    public void SetData(CardData data)
+    {
+        Data = data;
+        if (data == null) return;
+        if (titleText != null) titleText.text = data.title;
+        if (descriptionText != null) descriptionText.text = data.description;
     }
 
     public void SetSlot(int index, Vector2 position, float rotation)
@@ -152,13 +174,36 @@ public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (ScreenToHandLocal(eventData, out Vector2 localPoint))
             dragTarget = localPoint + (settings.keepGrabOffset ? grabOffset : Vector2.zero);
+
+        UpdatePlayZone(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        bool wantsToPlay = IsInPlayZone;
+
         dragging = false;
         AnyCardDragging = false;
         canvasGroup.blocksRaycasts = true;
+        SetInPlayZone(false);
+
+        if (wantsToPlay)
+            hand.RequestPlay(this);
+    }
+
+    private void UpdatePlayZone(PointerEventData eventData)
+    {
+        bool inZone = eventData.position.y >= Screen.height * settings.playZoneHeightPercent;
+        SetInPlayZone(inZone);
+    }
+
+    private void SetInPlayZone(bool inZone)
+    {
+        if (inZone == IsInPlayZone) return;
+        IsInPlayZone = inZone;
+
+        if (inZone) onEnterPlayZone.Invoke();
+        else onExitPlayZone.Invoke();
     }
 
     private bool ScreenToHandLocal(PointerEventData eventData, out Vector2 localPoint)

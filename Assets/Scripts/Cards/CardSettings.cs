@@ -42,4 +42,6 @@ public class CardSettings : ScriptableObject
     public float baseScale = 1f;
     [Tooltip("How close a released card must get to its slot before it drops back into normal draw order.")]
     public float settleDistance = 25f;
+    [Tooltip("How far above the screen the card must be released to be played")]
+    public float playZoneHeightPercent = .40f;
 }
