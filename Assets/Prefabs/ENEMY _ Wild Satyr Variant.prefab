@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2901389524996954156
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336598369573940700, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844305568273175123, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_Name
+      value: ENEMY _ Wild Satyr Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6844305568273175123, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6757618255871178338}
+    - targetCorrespondingSourceObject: {fileID: 6844305568273175123, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5827764542001334119}
+    - targetCorrespondingSourceObject: {fileID: 6569903487490935125, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6070897525011016022}
+  m_SourcePrefab: {fileID: 100100000, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+--- !u!114 &6400435824493160084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8111304116059438776, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+  m_PrefabInstance: {fileID: 2901389524996954156}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8317922077386789241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abc5a926091109438cf025f67818da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8317922077386789241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6569903487490935125, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+  m_PrefabInstance: {fileID: 2901389524996954156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6070897525011016022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8317922077386789241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622a01d327b54ed42890b31aeaebdba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puppetMovement: {fileID: 6400435824493160084}
+  duration: 0.25
+  moveStrength: -1.5
+  rotateAngle: 12
+--- !u!1 &8554611407832550015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6844305568273175123, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+  m_PrefabInstance: {fileID: 2901389524996954156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6757618255871178338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554611407832550015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb898a3c1ec64945b6cafc3f6e6f9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Wild Satyr
+  maxHealth: 100
+  attackDamage: 25
+  isFlying: 0
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6070897525011016022}
+        m_TargetAssemblyTypeName: Anim_OnDamage, Assembly-CSharp
+        m_MethodName: DamageFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onVulnerableChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5827764542001334119}
+        m_TargetAssemblyTypeName: Anim_EnemyAttack, Assembly-CSharp
+        m_MethodName: DamageFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDied:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5827764542001334119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554611407832550015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420ef8b5cab9d00489d79ded69a07891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puppetMovement: {fileID: 6400435824493160084}
+  duration: 0.5
+  targetPosition: {fileID: 0}
+  jumpHeight: 1
+  rotateAngle: 20

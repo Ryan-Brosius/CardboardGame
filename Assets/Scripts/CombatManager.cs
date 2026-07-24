@@ -27,6 +27,7 @@ public class CombatManager : MonoBehaviour
     public UnityEvent onCombatWon;
     public UnityEvent onCombatLost;
     public UnityEvent onFled;
+    public UnityEvent<Vector3> onPlayerAttack;
 
     public int Sword { get; private set; }
     public bool PlayerTurnActive { get; private set; }
@@ -159,6 +160,7 @@ public class CombatManager : MonoBehaviour
     {
         int final = target.VulnerableStacks > 0 ? Mathf.RoundToInt(amount * 1.5f) : amount;
         target.TakeDamage(final);
+        onPlayerAttack.Invoke(target.transform.position);
         Debug.Log($"Player did {final} damage to {target.EnemyName} leaving them with {target.Health} health");
     }
 

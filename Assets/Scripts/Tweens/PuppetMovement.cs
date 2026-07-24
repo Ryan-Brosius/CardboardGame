@@ -19,7 +19,7 @@ public class PuppetMovement : MonoBehaviour
     private Vector3 noiseSeed;
     private bool movementEnabled;
 
-    private void Start()
+    private void Awake()
     {
         startPosition = transform.localPosition;
         startRotation = transform.localRotation;
