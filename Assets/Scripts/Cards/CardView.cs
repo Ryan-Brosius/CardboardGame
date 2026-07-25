@@ -11,9 +11,10 @@ public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public static bool AnyCardDragging { get; private set; }
 
     // someone pls figure out how to do this later
-    [Header("DEBUG FOR NOW SO I UNDERSTAND THE CARDS WITH NO ART")]
+    [Header("Works fine bro")]
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private Image cardArt;
 
     [Header("Play Zone Hooks")]
     public UnityEvent onEnterPlayZone;
@@ -65,6 +66,7 @@ public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (data == null) return;
         if (titleText != null) titleText.text = data.title;
         if (descriptionText != null) descriptionText.text = data.description;
+        if (cardArt != null) cardArt.sprite = data.cardArt;
     }
 
     public void SetSlot(int index, Vector2 position, float rotation)

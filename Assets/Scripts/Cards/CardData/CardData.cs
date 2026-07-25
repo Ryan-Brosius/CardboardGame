@@ -4,6 +4,7 @@ public abstract class CardData : ScriptableObject
 {
     [Header("Display")]
     public string title;
+    public Sprite cardArt;
     [TextArea] public string description;
 
     [Header("Deck Rules")]

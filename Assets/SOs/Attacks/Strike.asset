@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Strike
   m_EditorClassIdentifier: 
   title: Strike
-  description: It attacks but like not very well
+  cardArt: {fileID: 21300000, guid: fee525ce45ac34d4d97f153cea6af5ee, type: 3}
+  description: Deal 6 damage
   alwaysLastInDeck: 0
   damage: 6
   hitsAllEnemies: 0

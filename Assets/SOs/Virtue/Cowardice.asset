@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 033cb6794b5fc4b4496d81ba36b81887, type: 3}
-  m_Name: Cleave
+  m_Script: {fileID: 11500000, guid: 04a5c7a55c4d9f9419d88eb8144fe11e, type: 3}
+  m_Name: Cowardice
   m_EditorClassIdentifier: 
-  title: Cleave
-  cardArt: {fileID: 21300000, guid: 618d0811bdec2444eb5ff0e01a6eda6d, type: 3}
-  description: Deal 2 damage to all enemies
+  title: Cowardice
+  cardArt: {fileID: 21300000, guid: a67f5e6ddb2e8e643a53e3c4ddb81029, type: 3}
+  description: Flee the encounter. Memento mori
   alwaysLastInDeck: 0
-  damage: 2
-  hitsAllEnemies: 1
-  canHitFlying: 0
+  type: 0
+  swordChange: 5
   vulnerableStacks: 0
+  cardsToDraw: 0

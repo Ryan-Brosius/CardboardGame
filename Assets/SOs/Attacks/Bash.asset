@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Bash
   m_EditorClassIdentifier: 
   title: Bash
-  description: Its like better I think :)
+  cardArt: {fileID: 21300000, guid: 5daf98176493f32419e6cb245f54a24f, type: 3}
+  description: Deal 3 damage. Apply 2 Vulnerable
   alwaysLastInDeck: 0
   damage: 3
   hitsAllEnemies: 0

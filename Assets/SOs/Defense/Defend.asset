@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5250e8aaaee10e49815c09d534fd94b, type: 3}
   m_Name: Defend
   m_EditorClassIdentifier: 
-  title: Defend
-  description: +2 AC this round
+  title: Fortify
+  cardArt: {fileID: 21300000, guid: 55d177d4185133345b8bdf147098804f, type: 3}
+  description: Halve all damage taken
   alwaysLastInDeck: 0
   type: 0

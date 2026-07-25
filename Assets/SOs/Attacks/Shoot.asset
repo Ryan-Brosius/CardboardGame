@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Shoot
   m_EditorClassIdentifier: 
   title: Shoot
-  description: I like having a gun its fun
+  cardArt: {fileID: 21300000, guid: 641935a7f0c43b24dac0259ee1cb8ebb, type: 3}
+  description: Deal 4 damage. Can hit airborne
   alwaysLastInDeck: 0
-  damage: 7
+  damage: 4
   hitsAllEnemies: 0
   canHitFlying: 1
   vulnerableStacks: 0
