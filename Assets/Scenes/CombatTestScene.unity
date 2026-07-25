@@ -371,6 +371,7 @@ MonoBehaviour:
   startingCards: 0
   cardDrawLocation: {fileID: 98662707}
   cardDiscardLocation: {fileID: 98662707}
+  deckManager: {fileID: 0}
   onHandEmptied:
     m_PersistentCalls:
       m_Calls: []
