@@ -29,17 +29,19 @@ public class Anim_PlayerAttack : MonoBehaviour
             if (puppetMovement != null) puppetMovement.PauseMovement();
         });
 
+        // Attack Wind-Up
         feedbackSequence.Append(
             transform.DOLocalMoveY(transform.localPosition.y + jumpHeight, duration / 2).SetEase(Ease.OutSine));
         feedbackSequence.Join(
             transform.DOLocalRotate(startRot + new Vector3(0f, 0f, rotateAngle), duration / 2).SetEase(Ease.OutSine));
 
+        // Actual Attack itself
         feedbackSequence.Append(
             transform.DOLocalMove(targetPosition, duration).SetEase(Ease.InOutBack));
         feedbackSequence.Join(
             transform.DOLocalRotate(startRot + new Vector3(0f, 180f, rotateAngle), duration).SetEase(Ease.InOutBack));
 
-
+        // Reset back to position
         feedbackSequence.Append(
             transform.DOLocalMove(startPos, duration * 2).SetEase(Ease.InOutSine));
         feedbackSequence.Join(

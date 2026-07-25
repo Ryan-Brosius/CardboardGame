@@ -35,11 +35,13 @@ public class Anim_OnDamage : MonoBehaviour
             if (puppetMovement != null) puppetMovement.PauseMovement();
         });
 
+        // Damage Knockback
         feedbackSequence.Append(
             transform.DOLocalMoveY(transform.localPosition.y + moveStrength, duration).SetEase(Ease.OutBack));
         feedbackSequence.Join(
             transform.DOLocalRotate(startRot + new Vector3(0f, 0f, rotateAngle), duration).SetEase(Ease.OutBack));
 
+        // Reset to Position
         feedbackSequence.Append(
             transform.DOLocalMoveY(startPos.y, duration * 2).SetEase(Ease.InOutSine));
         feedbackSequence.Join(
