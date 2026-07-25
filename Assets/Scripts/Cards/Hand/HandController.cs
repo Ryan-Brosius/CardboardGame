@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
+using static Unity.Collections.AllocatorManager;
 
 // I dont care no commends because game jam :)
 // Ryan made this its to display the hand
@@ -15,6 +18,10 @@ public class HandController : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool enableDebugSpawn = false;
     [SerializeField] private int startingCards = 0;
+
+    [Header("References")]
+    [SerializeField] private RectTransform cardDrawLocation;
+    [SerializeField] private RectTransform cardDiscardLocation;
 
     [Header("Events")]
     public UnityEvent onHandEmptied;
@@ -34,22 +41,15 @@ public class HandController : MonoBehaviour
             for (int i = 0; i < startingCards; i++)
                 AddCard((CardData)null);
         }
-
-        ApplyLayout(snap: true);
-    }
-
-    private void LateUpdate()
-    {
-        ApplyLayout(snap: false);
     }
 
     public CardView AddCard(CardData data)
     {
-        CardView card = Instantiate(cardPrefab, transform);
+        CardView card = Instantiate(cardPrefab, cardDrawLocation.position, Quaternion.identity, transform);
         card.Init(this, cardSettings);
         card.SetData(data);
         cards.Add(card);
-        ApplyLayout(snap: true);
+        ApplyLayout(snap: false);
         return card;
     }
 
@@ -62,13 +62,25 @@ public class HandController : MonoBehaviour
         }
     }
 
-    public List<CardData> RemoveAllCards()
+    public void DiscardCard(CardView card)
+    {
+        if (cards.Remove(card))
+        {
+            card.SetSlot(-1, new Vector2(-1300, 0), 0.0f);
+            DOVirtual.DelayedCall(2f, () => Destroy(card));
+        }
+
+        ApplyLayout(snap: false);
+    }
+
+    public List<CardData> DiscardAllCards()
     {
         List<CardData> datas = new List<CardData>();
         foreach (CardView card in cards)
         {
             if (card.Data != null) datas.Add(card.Data);
-            Destroy(card.gameObject);
+            card.SetSlot(-1, new Vector2(-1300, 0), 0.0f);
+            DOVirtual.DelayedCall(2f, () => Destroy(card));
         }
         cards.Clear();
         return datas;

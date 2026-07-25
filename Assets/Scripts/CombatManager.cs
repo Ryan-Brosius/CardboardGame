@@ -126,7 +126,7 @@ public class CombatManager : MonoBehaviour
 
         if (!AvariceActive)
         {
-            foreach (CardData card in hand.RemoveAllCards())
+            foreach (CardData card in hand.DiscardAllCards())
                 deck.ReturnToBottom(card);
         }
 
@@ -268,7 +268,7 @@ public class CombatManager : MonoBehaviour
 
     private void CleanUpDeckAfterEncounter()
     {
-        foreach (CardData card in hand.RemoveAllCards())
+        foreach (CardData card in hand.DiscardAllCards())
             deck.ReturnToBottom(card);
         deck.EndEncounter();
         AvariceActive = false;
