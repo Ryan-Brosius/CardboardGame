@@ -22,6 +22,7 @@ public class HandController : MonoBehaviour
     [Header("References")]
     [SerializeField] private RectTransform cardDrawLocation;
     [SerializeField] private RectTransform cardDiscardLocation;
+    [SerializeField] private DeckManager deckManager;
 
     [Header("Events")]
     public UnityEvent onHandEmptied;
@@ -45,6 +46,7 @@ public class HandController : MonoBehaviour
 
     public CardView AddCard(CardData data)
     {
+        Debug.Log("Added card");
         CardView card = Instantiate(cardPrefab, cardDrawLocation.position, Quaternion.identity, transform);
         card.Init(this, cardSettings);
         card.SetData(data);
@@ -55,9 +57,10 @@ public class HandController : MonoBehaviour
 
     public void RemoveCard(CardView card)
     {
+        Debug.Log("Removed card");
         if (cards.Remove(card))
         {
-            Destroy(card.gameObject);
+            Destroy(card.gameObject.gameObject);
             ApplyLayout(snap: false);
         }
     }
@@ -80,9 +83,10 @@ public class HandController : MonoBehaviour
         {
             if (card.Data != null) datas.Add(card.Data);
             card.SetSlot(-1, new Vector2(-1300, 0), 0.0f);
-            DOVirtual.DelayedCall(2f, () => Destroy(card));
+            DOVirtual.DelayedCall(2f, () => Destroy(card.gameObject));
         }
         cards.Clear();
+        ApplyLayout(snap: false);
         return datas;
     }
 

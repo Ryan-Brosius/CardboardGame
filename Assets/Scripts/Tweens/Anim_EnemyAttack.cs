@@ -18,8 +18,13 @@ public class Anim_EnemyAttack : MonoBehaviour
         if (puppetMovement == null) this.GetComponent<PuppetMovement>();
     }
 
-    public Sequence DamageFeedback(Action onImpact = null)
+    public Sequence DamageFeedback(Transform target = null, Action onImpact = null)
     {
+        if (target != null)
+        {
+            targetPosition = target;
+        }
+
         feedbackSequence?.Kill();
 
         Vector3 startPos = transform.localPosition;

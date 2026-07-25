@@ -2,10 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SocialPlatforms.Impl;
 using static UnityEngine.GraphicsBuffer;
 
 public class CombatManager : MonoBehaviour
@@ -13,17 +11,16 @@ public class CombatManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private HandController hand;
     [SerializeField] private DeckManager deck;
+    [SerializeField] private Transform enemySpawnParent;
+    [SerializeField] private List<Transform> enemySpawnPoints = new List<Transform>();
+
+    [Header("Player")]
     [SerializeField] private Transform player;
-
-    [SerializeField] private List<Enemy> enemies = new List<Enemy>();
-
-    [Tooltip("Animations")]
     [SerializeField] private Anim_PlayerAttack playerAttackAnim;
 
     [Header("Combat Values")]
     [SerializeField] private int startingSword = 100;   // basically just a test for health move later
     [SerializeField] private int drawPerTurn = 3;
-    [SerializeField] private int bountyOnWin = 100;
     [SerializeField] private float enemyAttackDelay = 0.6f;
 
     [Header("Events")]
@@ -33,36 +30,91 @@ public class CombatManager : MonoBehaviour
     public UnityEvent onPlayerBlockedHit;
     public UnityEvent onPlayerTurnStarted;
     public UnityEvent onEnemyTurnStarted;
+    public UnityEvent onWaveSpawned;
     public UnityEvent onCombatWon;
     public UnityEvent onCombatLost;
     public UnityEvent onFled;
 
     public int Sword { get; private set; }
+    public int Score { get; private set; }
     public bool PlayerTurnActive { get; private set; }
 
     public bool DefendActive { get; private set; }   // Defend: halve incoming, this round only
     public int BlockCharges { get; private set; }    // Block: negate next hit, persists until used
     public bool HubrisActive { get; private set; }   // Hubris: no defense cards this round
     public bool AvariceActive { get; private set; }  // Avarice: hand no longer reshuffles, rest of encounter
+
     public Anim_PlayerAttack PlayerAttackAnim => playerAttackAnim;
 
-    private bool encounterOver;
+    private readonly List<Enemy> enemies = new List<Enemy>();
+    private EncounterData encounter;
+    private int waveIndex;
+    private bool nextWaveIncoming;
+    private bool encounterOver = true;
+
+    [Header("Debug")]
+    [SerializeField] bool debugOn = false;
+    [SerializeField] private EncounterData debugEncounter;
 
     private void Start()
     {
         Sword = startingSword;
         onSwordChanged.Invoke(Sword);
-
-        hand.PlayHandler = TryPlayCard;
         hand.onHandEmptied.AddListener(OnHandEmptied);
 
+        if (debugOn)
+        {
+            encounter = debugEncounter;
+            BeginEncounter(encounter);
+        }
+    }
+
+    public void BeginEncounter(EncounterData data)
+    {
+        Debug.Log("encounter start");
+
+        ClearEnemies();
+
+        encounter = data;
+        waveIndex = 0;
+        nextWaveIncoming = false;
+        encounterOver = false;
+
+        hand.PlayHandler = TryPlayCard; // combat interprets cards again
         deck.BuildDeck();
+        SpawnWave(0);
         StartPlayerTurn();
+    }
+
+    private void SpawnWave(int index)
+    {
+        EncounterData.Wave wave = encounter.waves[index];
+        Debug.Log("Spawning wave");
+        for (int i = 0; i < wave.enemyPrefabs.Count; i++)
+        {
+            Debug.Log($"{wave.enemyPrefabs[i]}");
+
+            if (wave.enemyPrefabs[i] == null) continue;
+
+            Transform point = enemySpawnPoints[Mathf.Min(i, enemySpawnPoints.Count - 1)];
+            Enemy enemy = Instantiate(wave.enemyPrefabs[i], point.transform.position, Quaternion.identity, enemySpawnParent);
+            enemy.transform.localScale = wave.enemyPrefabs[i].transform.localScale;
+            enemies.Add(enemy);
+        }
+        onWaveSpawned.Invoke();
+    }
+
+    private void ClearEnemies()
+    {
+        foreach (Enemy enemy in enemies)
+            if (enemy != null) Destroy(enemy.gameObject);
+        enemies.Clear();
     }
 
     private void StartPlayerTurn()
     {
         if (encounterOver) return;
+        Debug.Log("started player turn");
         PlayerTurnActive = true;
         DrawCards(drawPerTurn);
         onPlayerTurnStarted.Invoke();
@@ -70,9 +122,11 @@ public class CombatManager : MonoBehaviour
 
     public void DrawCards(int count)
     {
+        Debug.Log("Trying to draw");
         for (int i = 0; i < count; i++)
         {
             CardData card = deck.Draw();
+            //Debug.Log($"{card.name}");
             if (card == null) break;
             hand.AddCard(card);
         }
@@ -84,10 +138,8 @@ public class CombatManager : MonoBehaviour
         if (!(data is ActionCardData action)) return false;
         if (!action.CanPlay(this)) return false;
 
-        Debug.Log($"Combat: player played {data.name} card.");
         action.Play(this);
         deck.AddToDiscard(data);
-        CheckVictory();
         return true;
     }
 
@@ -104,7 +156,7 @@ public class CombatManager : MonoBehaviour
                 if (vulnerableStacks > 0)
                     target.ApplyVulnerable(vulnerableStacks);
             }
-            CheckVictory();
+            CheckWaveCleared();
         };
 
         if (playerAttackAnim != null)
@@ -127,7 +179,7 @@ public class CombatManager : MonoBehaviour
         if (!AvariceActive)
         {
             foreach (CardData card in hand.DiscardAllCards())
-                deck.ReturnToBottom(card);
+                deck.AddToDiscard(card);
         }
 
         StartCoroutine(EnemyPhase());
@@ -138,12 +190,16 @@ public class CombatManager : MonoBehaviour
         while (playerAttackAnim != null && playerAttackAnim.IsPlaying)
             yield return null;
 
+        while (nextWaveIncoming)
+            yield return null;
+
+        if (encounterOver) yield break;
         onEnemyTurnStarted.Invoke();
 
-        foreach (Enemy enemy in enemies)
+        foreach (Enemy enemy in new List<Enemy>(enemies))
         {
             if (encounterOver) yield break;
-            if (!enemy.IsAlive) continue;
+            if (enemy == null || !enemy.IsAlive) continue;
 
             yield return new WaitForSeconds(enemyAttackDelay);
 
@@ -153,14 +209,17 @@ public class CombatManager : MonoBehaviour
 
             if (enemy.AttackAnim != null)
             {
-                Vector3 target = player.position;
-
-                yield return enemy.AttackAnim.DamageFeedback(impact).WaitForCompletion();
+                Vector3 target = player != null
+                    ? player.position
+                    : enemy.transform.position;
+                yield return enemy.AttackAnim.DamageFeedback(player, impact).WaitForCompletion();
             }
             else
             {
                 impact();
             }
+
+            Debug.Log($"{enemy.name} did {enemy.AttackDamage} damage");
         }
 
         if (encounterOver) yield break;
@@ -168,9 +227,8 @@ public class CombatManager : MonoBehaviour
         DefendActive = false;
         HubrisActive = false;
         foreach (Enemy enemy in enemies)
-            if (enemy.IsAlive) enemy.TickVulnerable();
+            if (enemy != null && enemy.IsAlive) enemy.TickVulnerable();
 
-        Debug.Log($"Player has {Sword} health left");
         StartPlayerTurn();
     }
 
@@ -190,6 +248,8 @@ public class CombatManager : MonoBehaviour
 
         onPlayerDamaged.Invoke(damage);
         ChangeSword(-damage);
+
+        Debug.Log($"Player has {Sword} health");
     }
 
     public List<Enemy> GetAttackTargets(bool hitAll, bool canHitFlying)
@@ -197,7 +257,7 @@ public class CombatManager : MonoBehaviour
         List<Enemy> targets = new List<Enemy>();
         foreach (Enemy enemy in enemies)
         {
-            if (!enemy.IsAlive) continue;
+            if (enemy == null || !enemy.IsAlive) continue;
             if (enemy.IsFlying && !canHitFlying) continue;
 
             targets.Add(enemy);
@@ -209,8 +269,8 @@ public class CombatManager : MonoBehaviour
     public void DealDamage(Enemy target, int amount)
     {
         int final = target.VulnerableStacks > 0 ? Mathf.RoundToInt(amount * 1.5f) : amount;
+        Debug.Log($"{target.name} took {final} damage");
         target.TakeDamage(final);
-        Debug.Log($"Player did {final} damage to {target.EnemyName} leaving them with {target.Health} health");
     }
 
     public void ActivateDefend() => DefendActive = true;
@@ -233,6 +293,12 @@ public class CombatManager : MonoBehaviour
             Lose();
     }
 
+    public void AddScore(int amount)
+    {
+        Score += amount;
+        onScoreChanged.Invoke(Score);
+    }
+
     public void Flee()
     {
         if (encounterOver) return;
@@ -244,16 +310,40 @@ public class CombatManager : MonoBehaviour
 
     public void AcceptJudgement()
     {
+        AddScore(Score);
         ChangeSword(-Sword);
     }
 
-    private void CheckVictory()
+    private void CheckWaveCleared()
     {
-        foreach (Enemy enemy in enemies)
-            if (enemy.IsAlive) return;
+        if (encounterOver || nextWaveIncoming) return;
 
+        foreach (Enemy enemy in enemies)
+            if (enemy != null && enemy.IsAlive) return;
+
+        if (waveIndex + 1 < encounter.waves.Count)
+        {
+            StartCoroutine(SpawnNextWave());
+            return;
+        }
+
+        Win();
+    }
+
+    private IEnumerator SpawnNextWave()
+    {
+        nextWaveIncoming = true;
+        yield return new WaitForSeconds(encounter.delayBetweenWaves);
+        waveIndex++;
+        SpawnWave(waveIndex);
+        nextWaveIncoming = false;
+    }
+
+    private void Win()
+    {
         encounterOver = true;
         PlayerTurnActive = false;
+        AddScore(encounter.bounty);
         CleanUpDeckAfterEncounter();
         onCombatWon.Invoke();
     }
@@ -263,7 +353,6 @@ public class CombatManager : MonoBehaviour
         encounterOver = true;
         PlayerTurnActive = false;
         onCombatLost.Invoke();
-        Debug.Log("Player Lost");
     }
 
     private void CleanUpDeckAfterEncounter()

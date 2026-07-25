@@ -10,25 +10,59 @@ public class DeckManager : MonoBehaviour
 
     public UnityEvent<int> onDrawPileChanged;
     public UnityEvent<int> onDiscardPileChanged;
+    public UnityEvent<int> onOwnedCardsChanged;
 
+    private readonly List<CardData> ownedCards = new List<CardData>();
     private readonly List<CardData> drawPile = new List<CardData>();    // 0 = top
     private readonly List<CardData> discardPile = new List<CardData>();
 
+    public IReadOnlyList<CardData> OwnedCards => ownedCards;
     public int DrawPileCount => drawPile.Count;
     public int DiscardPileCount => discardPile.Count;
+
+    // REMOVE LATER TESTING
+    //private void Awake()
+    //{
+    //    InitializeRun();
+    //}
+
+    public void InitializeRun()
+    {
+        ownedCards.Clear();
+        ownedCards.AddRange(startingDeck);
+        onOwnedCardsChanged.Invoke(ownedCards.Count);
+    }
+
+    public void AddOwnedCard(CardData card)
+    {
+        if (card == null) return;
+        ownedCards.Add(card);
+        onOwnedCardsChanged.Invoke(ownedCards.Count);
+    }
+
+    public bool RemoveOwnedCard(CardData card)
+    {
+        bool removed = ownedCards.Remove(card);
+        if (removed) onOwnedCardsChanged.Invoke(ownedCards.Count);
+        return removed;
+    }
 
     public void BuildDeck()
     {
         drawPile.Clear();
         discardPile.Clear();
-        drawPile.AddRange(startingDeck);
+        drawPile.AddRange(ownedCards);
         Shuffle();
         NotifyChanged();
     }
 
     public CardData Draw()
     {
-        if (drawPile.Count == 0) return null;
+        if (DrawPileCount == 0)
+        {
+            ReshuffleDiscardPile();
+        }
+
         CardData card = drawPile[0];
         drawPile.RemoveAt(0);
         NotifyChanged();
@@ -56,6 +90,16 @@ public class DeckManager : MonoBehaviour
         discardPile.Clear();
         Shuffle();
         NotifyChanged();
+    }
+
+    private void ReshuffleDiscardPile()
+    {
+        foreach (CardData card in discardPile)
+        {
+            drawPile.Add(card);
+        }
+
+        Shuffle();
     }
 
     private void Shuffle()

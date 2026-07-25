@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ENEMY _ Wild Satyr Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6844305568273175123, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -128,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Wild Satyr
-  maxHealth: 100
+  maxHealth: 1
   attackDamage: 25
   isFlying: 0
   onHealthChanged:
@@ -170,7 +174,7 @@ MonoBehaviour:
   onDied:
     m_PersistentCalls:
       m_Calls: []
-  attackAnim: {fileID: 0}
+  attackAnim: {fileID: 5827764542001334119}
 --- !u!114 &5827764542001334119
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,10 @@ public abstract class CardData : ScriptableObject
 
     [Header("Deck Rules")]
     public bool alwaysLastInDeck;
+
+    [Header("Almonry")]
+    public bool cannotBeDonated;
+    public int donationMultiplier = 1;
 }
 
 // Defines the cards that can be played in combat
