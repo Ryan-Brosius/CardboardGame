@@ -11,16 +11,14 @@ public class AttackCardData : ActionCardData
 
     public override bool CanPlay(CombatManager combat)
     {
-        return combat.GetAttackTargets(hitsAllEnemies, canHitFlying).Count > 0;
+        return combat.GetAttackTargets(hitsAllEnemies, canHitFlying).Count > 0 && !combat.PlayerAttackAnim.IsPlaying;
     }
 
     public override void Play(CombatManager combat)
     {
-        foreach (Enemy target in combat.GetAttackTargets(hitsAllEnemies, canHitFlying))
-        {
-            combat.DealDamage(target, damage);
-            if (vulnerableStacks > 0)
-                target.ApplyVulnerable(vulnerableStacks);
-        }
+        combat.PerformPlayerAttack(
+            combat.GetAttackTargets(hitsAllEnemies, canHitFlying),
+            damage,
+            vulnerableStacks);
     }
 }

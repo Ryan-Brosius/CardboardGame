@@ -314,6 +314,7 @@ MonoBehaviour:
   onDied:
     m_PersistentCalls:
       m_Calls: []
+  attackAnim: {fileID: 0}
 --- !u!4 &820219934
 Transform:
   m_ObjectHideFlags: 0
@@ -743,8 +744,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 128306917}
   deck: {fileID: 576246525}
+  player: {fileID: 778447919}
   enemies:
   - {fileID: 8328837245973594927}
+  playerAttackAnim: {fileID: 778447920}
   startingSword: 100
   drawPerTurn: 3
   bountyOnWin: 100
@@ -779,6 +782,12 @@ MonoBehaviour:
   onScoreChanged:
     m_PersistentCalls:
       m_Calls: []
+  onPlayerDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerBlockedHit:
+    m_PersistentCalls:
+      m_Calls: []
   onPlayerTurnStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -794,21 +803,6 @@ MonoBehaviour:
   onFled:
     m_PersistentCalls:
       m_Calls: []
-  onPlayerAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 778447920}
-        m_TargetAssemblyTypeName: Anim_PlayerAttack, Assembly-CSharp
-        m_MethodName: DamageFeedback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1661878093
 Transform:
   m_ObjectHideFlags: 0
@@ -1055,14 +1049,26 @@ PrefabInstance:
       objectReference: {fileID: 778447919}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: attackAnim
+      value: 
+      objectReference: {fileID: 8328837245973594928}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: attackDamage
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onAttack.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
@@ -1074,12 +1080,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1006889374}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1006889374}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DamageFeedback
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1102,12 +1120,20 @@ PrefabInstance:
       value: DamageFeedback
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Anim_OnDamage, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Anim_OnDamage, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onVulnerableChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Anim_OnDamage, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1254,6 +1280,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb898a3c1ec64945b6cafc3f6e6f9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8328837245973594928 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5827764542001334119, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+  m_PrefabInstance: {fileID: 1289943201387544484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420ef8b5cab9d00489d79ded69a07891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &9028918546319191589

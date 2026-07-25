@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -10,13 +11,14 @@ public class Anim_EnemyAttack : MonoBehaviour
     [SerializeField] private float rotateAngle = -15f;
 
     private Sequence feedbackSequence;
+    public bool IsPlaying => feedbackSequence != null && feedbackSequence.IsActive() && feedbackSequence.IsPlaying();
 
     private void Awake()
     {
         if (puppetMovement == null) this.GetComponent<PuppetMovement>();
     }
 
-    public void DamageFeedback()
+    public Sequence DamageFeedback(Action onImpact = null)
     {
         feedbackSequence?.Kill();
 
@@ -41,7 +43,10 @@ public class Anim_EnemyAttack : MonoBehaviour
             transform.DOLocalMove(targetPosition.position, duration).SetEase(Ease.InOutBack));
         feedbackSequence.Join(
             transform.DOLocalRotate(startRot + new Vector3(0f, 0f, rotateAngle), duration).SetEase(Ease.InOutBack));
-            
+
+        if (onImpact != null)
+            feedbackSequence.AppendCallback(() => onImpact());
+
         // Reset to Position
         feedbackSequence.Append(
             transform.DOLocalMove(startPos, duration * 2).SetEase(Ease.InOutSine));
@@ -52,5 +57,7 @@ public class Anim_EnemyAttack : MonoBehaviour
         {
             if (puppetMovement != null) puppetMovement.StartMovement();
         });
+
+        return feedbackSequence;
     }
 }

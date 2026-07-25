@@ -16,12 +16,16 @@ public class Enemy : MonoBehaviour
     public UnityEvent onAttack;               
     public UnityEvent onDied;
 
+    [Header("Animations")]
+    [SerializeField] private Anim_EnemyAttack attackAnim;
+
     public string EnemyName => enemyName;
     public int Health { get; private set; }
     public int AttackDamage => attackDamage;
     public bool IsFlying => isFlying;
     public bool IsAlive => Health > 0;
     public int VulnerableStacks { get; private set; }
+    public Anim_EnemyAttack AttackAnim => attackAnim;
 
     private void Awake()
     {
