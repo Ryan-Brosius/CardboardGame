@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3022285703247195100}
+  - component: {fileID: 526467955992918096}
   m_Layer: 0
   m_Name: Sword_Pos
   m_TagString: Untagged
@@ -32,6 +33,23 @@ Transform:
   - {fileID: 6295799921653000464}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &526467955992918096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390888161981191685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914ec72c73294614a8f8432ce9178acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosition: {fileID: 0}
+  endPosition: {fileID: 0}
+  dropDuration: 0.25
+  raiseDuration: 0.5
+  swordMax: 100
 --- !u!1 &2080914270798596154
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5934310266772918274}
   - component: {fileID: 1597434066778955574}
+  - component: {fileID: 5260848554272296555}
   m_Layer: 0
   m_Name: damocles_sword
   m_TagString: Untagged
@@ -119,6 +138,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5260848554272296555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080914270798596154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f647590283d57db4cba210cd47a74986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowMat: {fileID: 2100000, guid: 4e4fa9e3928969f41b452c17d8939830, type: 2}
+  Offset: {x: -0.05, y: -0.05, z: 0}
 --- !u!1 &8607406475809897728
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,5 +304,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f647590283d57db4cba210cd47a74986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowMat: {fileID: 2100000, guid: ae1472f6f62c26547a69ea0b6c3fbf5e, type: 2}
+  shadowMat: {fileID: 2100000, guid: 4e4fa9e3928969f41b452c17d8939830, type: 2}
   Offset: {x: -0.08, y: -0.1, z: 0}

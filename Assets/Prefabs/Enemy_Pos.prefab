@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f647590283d57db4cba210cd47a74986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowMat: {fileID: 2100000, guid: ae1472f6f62c26547a69ea0b6c3fbf5e, type: 2}
+  shadowMat: {fileID: 2100000, guid: 4e4fa9e3928969f41b452c17d8939830, type: 2}
   Offset: {x: 0.08, y: -0.1, z: 0}
 --- !u!1 &8085807265908031161
 GameObject:
@@ -286,5 +286,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f647590283d57db4cba210cd47a74986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowMat: {fileID: 2100000, guid: ae1472f6f62c26547a69ea0b6c3fbf5e, type: 2}
+  shadowMat: {fileID: 2100000, guid: 4e4fa9e3928969f41b452c17d8939830, type: 2}
   Offset: {x: 0.15, y: -0.07, z: 0}

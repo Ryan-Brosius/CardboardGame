@@ -108,11 +108,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword_Pos
       objectReference: {fileID: 0}
-    - target: {fileID: 1316376135377364761, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}
+    - target: {fileID: 526467955992918096, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}
       propertyPath: endPosition
       value: 
       objectReference: {fileID: 8811528673334142940}
-    - target: {fileID: 1316376135377364761, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}
+    - target: {fileID: 526467955992918096, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}
       propertyPath: startPosition
       value: 
       objectReference: {fileID: 2151176741244453419}
@@ -159,33 +159,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 390888161981191685, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3326602722847330334}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}
---- !u!1 &6347841807097030259 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 390888161981191685, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}
-  m_PrefabInstance: {fileID: 6734190736246255734}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3326602722847330334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6347841807097030259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 914ec72c73294614a8f8432ce9178acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPosition: {fileID: 2151176741244453419}
-  endPosition: {fileID: 8811528673334142940}
-  dropDuration: 0.25
-  raiseDuration: 0.5
-  swordMax: 100
 --- !u!4 &8396387689219578794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3022285703247195100, guid: ee3a3519e6292a048a82a5f9eb22a9d9, type: 3}

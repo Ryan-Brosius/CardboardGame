@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 626229619193783426, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: shadowMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e4fa9e3928969f41b452c17d8939830, type: 2}
     - target: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.22
@@ -48,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4142629007653024517, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+      propertyPath: shadowMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e4fa9e3928969f41b452c17d8939830, type: 2}
     - target: {fileID: 6336598369573940700, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.16
@@ -162,6 +170,7 @@ MonoBehaviour:
   onDied:
     m_PersistentCalls:
       m_Calls: []
+  attackAnim: {fileID: 0}
 --- !u!114 &5827764542001334119
 MonoBehaviour:
   m_ObjectHideFlags: 0
