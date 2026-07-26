@@ -182,6 +182,8 @@ public class CombatManager : MonoBehaviour
 
     private void OnHandEmptied()
     {
+        return;
+
         if (PlayerTurnActive && !encounterOver)
             EndTurn();
     }
