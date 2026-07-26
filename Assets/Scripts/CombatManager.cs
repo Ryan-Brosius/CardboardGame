@@ -102,6 +102,11 @@ public class CombatManager : MonoBehaviour
             Enemy enemy = Instantiate(wave.enemyPrefabs[i], point.transform.position, Quaternion.identity, enemySpawnParent);
             enemy.transform.localScale = wave.enemyPrefabs[i].transform.localScale;
             enemies.Add(enemy);
+
+            if (HubrisActive)
+            {
+                enemy.ApplyVulnerable(99);
+            }
         }
         onWaveSpawned.Invoke();
     }
@@ -229,8 +234,6 @@ public class CombatManager : MonoBehaviour
 
         if (encounterOver) yield break;
 
-        DefendActive = false;
-        HubrisActive = false;
         foreach (Enemy enemy in enemies)
             if (enemy != null && enemy.IsAlive) enemy.TickVulnerable();
 
@@ -320,6 +323,11 @@ public class CombatManager : MonoBehaviour
         if (encounterOver) return;
         encounterOver = true;
         PlayerTurnActive = false;
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
+        }
+        enemies.Clear();
         CleanUpDeckAfterEncounter();
         onFled.Invoke();
     }
