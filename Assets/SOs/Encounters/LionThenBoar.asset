@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d3d524d4da314749a0ec4052972d6f4, type: 3}
-  m_Name: SingleBoar
+  m_Name: LionThenBoar
   m_EditorClassIdentifier: 
-  bounty: 80
+  bounty: 240
   delayBetweenWaves: 0.8
   waves:
+  - enemyPrefabs:
+    - {fileID: 3892003300353123878, guid: 003b6560d86d4fa41922ff5d2c7134cb, type: 3}
   - enemyPrefabs:
     - {fileID: 5517489780008822421, guid: f52c11123ab33e94c80a8b7e099d5fde, type: 3}

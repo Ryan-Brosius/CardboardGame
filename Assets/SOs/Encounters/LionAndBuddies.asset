@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d3d524d4da314749a0ec4052972d6f4, type: 3}
+  m_Name: LionAndBuddies
+  m_EditorClassIdentifier: 
+  bounty: 300
+  delayBetweenWaves: 0.8
+  waves:
+  - enemyPrefabs:
+    - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}
+    - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}
+  - enemyPrefabs:
+    - {fileID: 3892003300353123878, guid: 003b6560d86d4fa41922ff5d2c7134cb, type: 3}
+  - enemyPrefabs:
+    - {fileID: 3847610935578846019, guid: 409cc60c0586d924fb4b92907236def0, type: 3}
+    - {fileID: 3847610935578846019, guid: 409cc60c0586d924fb4b92907236def0, type: 3}

@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d3d524d4da314749a0ec4052972d6f4, type: 3}
-  m_Name: SingleBoar
+  m_Name: HarpyAndBoar
   m_EditorClassIdentifier: 
-  bounty: 80
+  bounty: 180
   delayBetweenWaves: 0.8
   waves:
   - enemyPrefabs:
+    - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}
     - {fileID: 5517489780008822421, guid: f52c11123ab33e94c80a8b7e099d5fde, type: 3}

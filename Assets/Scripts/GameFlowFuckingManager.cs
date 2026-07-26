@@ -136,6 +136,8 @@ public class GameFlowFuckingManager : MonoBehaviour
         if (transitioning || CurrentPhase != Phase.ZoneSelect) return false;
         if (!(card is ZoneCardData zone) || zone.encounter == null) return false;
 
+        spoilsChoices = zone.encounter.spoilsSelections;
+
         StartCoroutine(FinishPickThen(() => StartCombat(zone.encounter)));
         return true;
     }
