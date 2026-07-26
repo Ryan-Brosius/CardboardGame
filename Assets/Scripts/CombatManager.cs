@@ -124,6 +124,14 @@ public class CombatManager : MonoBehaviour
         Debug.Log("started player turn");
         PlayerTurnActive = true;
         DrawCards(drawPerTurn);
+
+        if (hand.Count == 0)
+        {
+            CardData judgement = deck.DrawJudgement();
+            if (judgement != null)
+                hand.AddCard(judgement);
+        }
+
         onPlayerTurnStarted.Invoke();
     }
 
@@ -146,7 +154,7 @@ public class CombatManager : MonoBehaviour
         if (!action.CanPlay(this)) return false;
 
         action.Play(this);
-        deck.AddToDiscard(data);
+        //deck.AddToDiscard(data);
         return true;
     }
 
@@ -316,6 +324,11 @@ public class CombatManager : MonoBehaviour
     {
         Score += amount;
         onScoreChanged.Invoke(Score);
+    }
+
+    public void RebuildHand()
+    {
+        deck.BuildDeck();
     }
 
     public void Flee()

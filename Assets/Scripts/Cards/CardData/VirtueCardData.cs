@@ -49,7 +49,7 @@ public class VirtueCardData : ActionCardData
 
             case VirtueType.Cowardice:
                 combat.ChangeSword(swordChange);
-                combat.Flee();
+                combat.RebuildHand();
                 break;
 
             case VirtueType.Justice:

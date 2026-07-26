@@ -7,6 +7,7 @@ public class DeckManager : MonoBehaviour
     // Maybe a bad name? This really is the "COMBAT" deck. Maybe requires a change later, and shuffle gets moved into a UTIL
 
     [SerializeField] private List<CardData> startingDeck = new List<CardData>();
+    [SerializeField] private CardData JusticeCard;
 
     public UnityEvent<int> onDrawPileChanged;
     public UnityEvent<int> onDiscardPileChanged;
@@ -19,6 +20,8 @@ public class DeckManager : MonoBehaviour
     public IReadOnlyList<CardData> OwnedCards => ownedCards;
     public int DrawPileCount => drawPile.Count;
     public int DiscardPileCount => discardPile.Count;
+
+    public bool JudgementSpawned { get; private set; }
 
     // REMOVE LATER TESTING
     //private void Awake()
@@ -51,6 +54,7 @@ public class DeckManager : MonoBehaviour
     {
         drawPile.Clear();
         discardPile.Clear();
+        JudgementSpawned = false;
         drawPile.AddRange(ownedCards);
         Shuffle();
         NotifyChanged();
@@ -58,15 +62,23 @@ public class DeckManager : MonoBehaviour
 
     public CardData Draw()
     {
-        if (DrawPileCount == 0)
-        {
+        if (drawPile.Count == 0)
             ReshuffleDiscardPile();
-        }
+
+        if (drawPile.Count == 0)
+            return null;
 
         CardData card = drawPile[0];
         drawPile.RemoveAt(0);
         NotifyChanged();
         return card;
+    }
+
+    public CardData DrawJudgement()
+    {
+        if (JudgementSpawned || JusticeCard == null) return null;
+        JudgementSpawned = true;
+        return JusticeCard;
     }
 
     public void ReturnToBottom(CardData card)
@@ -94,12 +106,12 @@ public class DeckManager : MonoBehaviour
 
     private void ReshuffleDiscardPile()
     {
-        foreach (CardData card in discardPile)
-        {
-            drawPile.Add(card);
-        }
+        if (discardPile.Count == 0) return;
 
+        drawPile.AddRange(discardPile);
+        discardPile.Clear();
         Shuffle();
+        NotifyChanged();
     }
 
     private void Shuffle()
