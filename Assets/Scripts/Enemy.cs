@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public UnityEvent<int> onVulnerableChanged;
     public UnityEvent<bool> onFlyingChanged;
     public UnityEvent onDamageNegated;
+    public UnityEvent onExhausted;
     public UnityEvent onAttack;               
     public UnityEvent onDied;
 
@@ -112,6 +113,7 @@ public class Enemy : MonoBehaviour
             if (stamina == 0)
             {
                 canAttack = false;
+                onExhausted.Invoke();
                 ApplyVulnerable(99);
             }
         }
