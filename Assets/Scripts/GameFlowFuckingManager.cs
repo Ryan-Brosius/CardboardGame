@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 // TLDR: director fucker
 public class GameFlowFuckingManager : MonoBehaviour
@@ -45,6 +48,10 @@ public class GameFlowFuckingManager : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent<string> onPhaseChanged;
+
+    [Header("Death Scene")]
+    [SerializeField] private VideoPlayer deathVideo;
+    [SerializeField] private GameObject deathRawImage;
 
     public Phase CurrentPhase { get; private set; }
     private bool transitioning;
@@ -147,6 +154,14 @@ public class GameFlowFuckingManager : MonoBehaviour
         SetPhase(Phase.GameOver);
         hand.PlayHandler = null;
         hand.DiscardAllCards();
+
+        deathRawImage.SetActive(true);
+        deathVideo.gameObject.SetActive(true);
+        deathVideo.Play();
+        DOVirtual.DelayedCall((float)deathVideo.length, () =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
     }
 
     private void DealRandom<T>(List<T> pool, int count) where T : CardData
