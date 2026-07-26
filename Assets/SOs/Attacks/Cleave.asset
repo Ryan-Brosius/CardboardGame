@@ -16,7 +16,9 @@ MonoBehaviour:
   cardArt: {fileID: 21300000, guid: 618d0811bdec2444eb5ff0e01a6eda6d, type: 3}
   description: Deal 2 damage to all enemies
   alwaysLastInDeck: 0
-  damage: 2
+  cannotBeDonated: 0
+  donationMultiplier: 1
+  damage: 4
   hitsAllEnemies: 1
   canHitFlying: 0
   vulnerableStacks: 0

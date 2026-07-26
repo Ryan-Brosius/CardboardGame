@@ -16,7 +16,9 @@ MonoBehaviour:
   cardArt: {fileID: 21300000, guid: a67f5e6ddb2e8e643a53e3c4ddb81029, type: 3}
   description: Flee the encounter. Memento mori
   alwaysLastInDeck: 0
+  cannotBeDonated: 0
+  donationMultiplier: 1
   type: 0
-  swordChange: 5
+  swordChange: -5
   vulnerableStacks: 0
   cardsToDraw: 0

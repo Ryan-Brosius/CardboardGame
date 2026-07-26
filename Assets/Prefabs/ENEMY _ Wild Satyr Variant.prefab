@@ -132,9 +132,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Wild Satyr
-  maxHealth: 1
-  attackDamage: 25
+  maxHealth: 10
+  attackDamage: 15
   isFlying: 0
+  stamina: -1
+  canAttack: 1
+  canFly: 0
   onHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -154,6 +157,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onVulnerableChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onFlyingChanged:
     m_PersistentCalls:
       m_Calls: []
   onAttack:

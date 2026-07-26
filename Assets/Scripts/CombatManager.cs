@@ -199,6 +199,7 @@ public class CombatManager : MonoBehaviour
         foreach (Enemy enemy in new List<Enemy>(enemies))
         {
             if (encounterOver) yield break;
+            if (!enemy.CanAttack) continue;
             if (enemy == null || !enemy.IsAlive) continue;
 
             yield return new WaitForSeconds(enemyAttackDelay);
@@ -218,6 +219,8 @@ public class CombatManager : MonoBehaviour
             {
                 impact();
             }
+
+            enemy.AttackUpdates();
 
             Debug.Log($"{enemy.name} did {enemy.AttackDamage} damage");
         }
@@ -268,7 +271,7 @@ public class CombatManager : MonoBehaviour
 
     public void DealDamage(Enemy target, int amount)
     {
-        int final = target.VulnerableStacks > 0 ? Mathf.RoundToInt(amount * 1.5f) : amount;
+        int final = target.VulnerableStacks > 0 ? Mathf.RoundToInt(amount * 2.0f) : amount;
         Debug.Log($"{target.name} took {final} damage");
         target.TakeDamage(final);
     }

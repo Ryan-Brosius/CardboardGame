@@ -16,7 +16,9 @@ MonoBehaviour:
   cardArt: {fileID: 21300000, guid: 180cefb9d7d900248aab6fec6e734c8d, type: 3}
   description: All enemies are vulnerable. Memento mori
   alwaysLastInDeck: 0
+  cannotBeDonated: 0
+  donationMultiplier: 1
   type: 0
-  swordChange: 10
+  swordChange: -10
   vulnerableStacks: 2
   cardsToDraw: 0

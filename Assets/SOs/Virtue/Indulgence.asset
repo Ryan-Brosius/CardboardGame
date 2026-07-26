@@ -16,7 +16,9 @@ MonoBehaviour:
   cardArt: {fileID: 21300000, guid: d805b4449bec9434985544d6a4de1694, type: 3}
   description: Draw 2 cards. Memento mori
   alwaysLastInDeck: 0
+  cannotBeDonated: 0
+  donationMultiplier: 1
   type: 3
-  swordChange: 5
+  swordChange: -5
   vulnerableStacks: 0
   cardsToDraw: 2

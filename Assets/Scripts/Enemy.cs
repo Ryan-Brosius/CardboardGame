@@ -8,11 +8,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int maxHealth = 20;
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private bool isFlying;
+    [SerializeField] private int stamina = -1;              // How many times they can attack before tiring (negative numbers can attack forever)
+    [SerializeField] private bool canAttack = true;
+    [SerializeField] private bool canFly = false;
+    [SerializeField] private bool isImpervious = false;
 
     [Header("Events")]
     public UnityEvent<int> onHealthChanged;   
     public UnityEvent<int> onDamaged;
     public UnityEvent<int> onVulnerableChanged;
+    public UnityEvent<bool> onFlyingChanged;
+    public UnityEvent onDamageNegated;
     public UnityEvent onAttack;               
     public UnityEvent onDied;
 
@@ -24,21 +30,36 @@ public class Enemy : MonoBehaviour
     public int AttackDamage => attackDamage;
     public bool IsFlying => isFlying;
     public bool IsAlive => Health > 0;
+    public bool IsImpervious => isImpervious;
     public int VulnerableStacks { get; private set; }
     public Anim_EnemyAttack AttackAnim => attackAnim;
+    public bool CanAttack => canAttack;
 
     private void Awake()
     {
         Health = maxHealth;
+        if (!canAttack) canAttack = true;
+        if (canFly && !isFlying)
+        {
+            isFlying = true;
+        }
     }
 
     private void Start()
     {
         onHealthChanged.Invoke(Health);
+        onFlyingChanged.Invoke(isFlying);
     }
 
     public void TakeDamage(int amount)
     {
+        if (isImpervious)
+        {
+            Debug.Log($"Enemy {enemyName} is impervious to damage");
+            onDamageNegated.Invoke();
+            return;
+        }
+
         Debug.Log($"Enemy {enemyName} took {amount} damage");
 
         if (!IsAlive || amount <= 0) return;
@@ -59,6 +80,7 @@ public class Enemy : MonoBehaviour
         if (!IsAlive || stacks <= 0) return;
         VulnerableStacks += stacks;
         onVulnerableChanged.Invoke(VulnerableStacks);
+        UpdateImpervious();
         Debug.Log($"Enemy {enemyName} gained {stacks} vulnerable and now has {VulnerableStacks} vulnerable.");
     }
 
@@ -73,5 +95,44 @@ public class Enemy : MonoBehaviour
     public void NotifyAttacking()
     {
         onAttack.Invoke();
+    }
+
+    public void AttackUpdates()
+    {
+        UpdateStamina();
+        UpdateFlight();
+    }
+
+    private void UpdateStamina()
+    {
+        if (stamina <= -1) return;
+        else
+        {
+            stamina--;
+            if (stamina == 0)
+            {
+                canAttack = false;
+                ApplyVulnerable(99);
+            }
+        }
+    }
+
+    private void UpdateFlight()
+    {
+        if (canFly && isFlying)
+        {
+            isFlying = false;
+            onFlyingChanged.Invoke(isFlying);
+        }
+        else if (canFly && !isFlying)
+        {
+            isFlying = true;
+            onFlyingChanged.Invoke(isFlying);
+        }
+    }
+
+    private void UpdateImpervious()
+    {
+        if (isImpervious && VulnerableStacks > 0) isImpervious = false;
     }
 }

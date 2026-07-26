@@ -16,7 +16,9 @@ MonoBehaviour:
   cardArt: {fileID: 21300000, guid: 9efc26391c04f9845b6d976aa97fd59d, type: 3}
   description: Offer as tribute to delay the blade
   alwaysLastInDeck: 0
+  cannotBeDonated: 0
+  donationMultiplier: 3
   type: 1
-  swordChange: -30
+  swordChange: 0
   vulnerableStacks: 0
   cardsToDraw: 0
