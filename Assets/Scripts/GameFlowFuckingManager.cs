@@ -12,6 +12,11 @@ public class GameFlowFuckingManager : MonoBehaviour
 {
     public enum Phase { Combat, Spoils, Almonry, ZoneSelect, GameOver }
 
+    [Header("Game Start Shenanigans")]
+    [SerializeField] GameObject startScreen;
+    [SerializeField] Anim_Curtains curtains;
+    [SerializeField] ZoneCardData startGameCard;
+
     [Header("References")]
     [SerializeField] private HandController hand;
     [SerializeField] private DeckManager deck;
@@ -62,8 +67,30 @@ public class GameFlowFuckingManager : MonoBehaviour
         combat.onCombatLost.AddListener(OnCombatLost);
         combat.onFled.AddListener(OnCombatFled);
 
+        DealPlayCard();
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(StartGameSequence());
+    }
+
+    private IEnumerator StartGameSequence()
+    {
+        curtains.CloseCurtains();
+        yield return new WaitForSeconds(1.0f);
+        startScreen.SetActive(false);
+        curtains.OpenCurtains();
+        yield return new WaitForSeconds(1.0f);
         deck.InitializeRun();
         StartCombat(firstEncounter);
+    }
+
+    private void DealPlayCard()
+    {
+        SetPhase(Phase.ZoneSelect);
+        hand.PlayHandler = OnZoneCardPlayed;
+        hand.AddCard(startGameCard);
     }
 
     private void SetPhase(Phase phase)
@@ -142,6 +169,12 @@ public class GameFlowFuckingManager : MonoBehaviour
     {
         if (transitioning || CurrentPhase != Phase.ZoneSelect) return false;
         if (!(card is ZoneCardData zone) || zone.encounter == null) return false;
+
+        if (card == startGameCard)
+        {
+            StartGame();
+            return true;
+        }
 
         spoilsChoices = zone.encounter.spoilsSelections;
 

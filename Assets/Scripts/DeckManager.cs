@@ -8,6 +8,7 @@ public class DeckManager : MonoBehaviour
 
     [SerializeField] private List<CardData> startingDeck = new List<CardData>();
     [SerializeField] private CardData JusticeCard;
+    [SerializeField] private CardData ConclusionCard;
 
     public UnityEvent<int> onDrawPileChanged;
     public UnityEvent<int> onDiscardPileChanged;
@@ -50,6 +51,11 @@ public class DeckManager : MonoBehaviour
         return removed;
     }
 
+    public void RemoveCowardiceFromDraw(CardData card)
+    {
+        drawPile.Remove(card);
+    }
+
     public void BuildDeck()
     {
         drawPile.Clear();
@@ -79,6 +85,12 @@ public class DeckManager : MonoBehaviour
         if (JudgementSpawned || JusticeCard == null) return null;
         JudgementSpawned = true;
         return JusticeCard;
+    }
+
+    public CardData DrawConclusion()
+    {
+        if (ConclusionCard != null) return ConclusionCard;
+        else return null;
     }
 
     public void ReturnToBottom(CardData card)

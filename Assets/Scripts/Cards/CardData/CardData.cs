@@ -9,6 +9,7 @@ public abstract class CardData : ScriptableObject
 
     [Header("Deck Rules")]
     public bool alwaysLastInDeck;
+    public bool isConclusionCard;
 
     [Header("Almonry")]
     public bool cannotBeDonated;

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BoardAndSatyr
   m_EditorClassIdentifier: 
   bounty: 120
+  spoilsSelections: 3
   delayBetweenWaves: 0.8
   waves:
   - enemyPrefabs:

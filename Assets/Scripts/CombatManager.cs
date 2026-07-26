@@ -131,7 +131,12 @@ public class CombatManager : MonoBehaviour
             if (judgement != null)
                 hand.AddCard(judgement);
         }
-
+        else
+        {
+            CardData turnEndCard = deck.DrawConclusion();
+            if (turnEndCard != null) hand.AddCard(turnEndCard);
+        }
+            
         onPlayerTurnStarted.Invoke();
     }
 
@@ -196,7 +201,7 @@ public class CombatManager : MonoBehaviour
         if (!AvariceActive)
         {
             foreach (CardData card in hand.DiscardAllCards())
-                deck.AddToDiscard(card);
+                if (!card.isConclusionCard) deck.AddToDiscard(card);
         }
 
         StartCoroutine(EnemyPhase());
@@ -317,6 +322,7 @@ public class CombatManager : MonoBehaviour
     public void ChangeSword(int delta)
     {
         Sword = Mathf.Max(0, Sword + delta);
+        Mathf.Clamp(Sword, 0, startingSword);
         onSwordChanged.Invoke(Sword);
         if (Sword <= 0 && !encounterOver)
             Lose();
@@ -328,9 +334,10 @@ public class CombatManager : MonoBehaviour
         onScoreChanged.Invoke(Score);
     }
 
-    public void RebuildHand()
+    public void RebuildHand(CardData cowardiceCard)
     {
         deck.BuildDeck();
+        deck.RemoveCowardiceFromDraw(cowardiceCard);
     }
 
     public void Flee()

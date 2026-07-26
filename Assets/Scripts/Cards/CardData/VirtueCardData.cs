@@ -10,7 +10,8 @@ public class VirtueCardData : ActionCardData
         Avarice,     
         Indulgence,  
         Cowardice,   
-        Justice,     
+        Justice,
+        Conclusion
     }
 
     [Header("Virtue")]
@@ -49,11 +50,14 @@ public class VirtueCardData : ActionCardData
 
             case VirtueType.Cowardice:
                 combat.ChangeSword(swordChange);
-                combat.RebuildHand();
+                combat.RebuildHand(this);
                 break;
 
             case VirtueType.Justice:
                 combat.AcceptJudgement();
+                break;
+            case VirtueType.Conclusion:
+                combat.EndTurn();
                 break;
         }
     }

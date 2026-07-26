@@ -9,17 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a5c7a55c4d9f9419d88eb8144fe11e, type: 3}
-  m_Name: Justice
+  m_Script: {fileID: 11500000, guid: 84cdd73bcab21604c8f6344b6832e29e, type: 3}
+  m_Name: StartGameCard
   m_EditorClassIdentifier: 
-  title: ACCEPTANCE
+  title: PLAY
   cardArt: {fileID: 21300000, guid: 42d0aa1288da8e346b3c36417bc57f5c, type: 3}
-  description: ACCEPT DEATH FOR VIRTUE
-  alwaysLastInDeck: 1
+  description: DRAG CARD UP TO START GAME
+  alwaysLastInDeck: 0
   isConclusionCard: 0
   cannotBeDonated: 1
-  donationMultiplier: 1
-  type: 5
-  swordChange: -100
-  vulnerableStacks: 0
-  cardsToDraw: 0
+  donationMultiplier: 0
+  encounter: {fileID: 11400000, guid: 04c62d0a401f96b498cff9fd29b5ada0, type: 2}

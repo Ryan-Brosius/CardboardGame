@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84cdd73bcab21604c8f6344b6832e29e, type: 3}
   m_Name: ZoneCardTest
   m_EditorClassIdentifier: 
-  title: TEST ZONE
+  title: PATH OF BRONZE
   cardArt: {fileID: 21300000, guid: 8524a66e8e0989c428a34b414d18af4a, type: 3}
   description: This is a zone I think and Im going to continue typing because I wanna
     see how small I can eventually make this text and sometimes we need to smell

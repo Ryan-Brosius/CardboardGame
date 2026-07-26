@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LionThenBoar
   m_EditorClassIdentifier: 
   bounty: 240
+  spoilsSelections: 3
   delayBetweenWaves: 0.8
   waves:
   - enemyPrefabs:

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HarpyAndBoar
   m_EditorClassIdentifier: 
   bounty: 180
+  spoilsSelections: 3
   delayBetweenWaves: 0.8
   waves:
   - enemyPrefabs:

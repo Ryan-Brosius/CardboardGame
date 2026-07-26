@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Erymanthian Boar
   maxHealth: 10
-  attackDamage: 15
+  attackDamage: 12
   isFlying: 0
   stamina: -1
   canAttack: 1

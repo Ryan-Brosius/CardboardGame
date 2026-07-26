@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: inactiveHeight
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8554611407832550015, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: m_Name
       value: ENEMY _ Erymanthian Boar Variant

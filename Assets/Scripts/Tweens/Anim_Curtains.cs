@@ -80,4 +80,34 @@ public class Anim_Curtains : MonoBehaviour
             if (rightPuppetMove != null) rightPuppetMove.StartMovement();
         });
     }
+
+    public void OpenAndClose()
+    {
+        openSequence?.Kill();
+        closeSequence?.Kill();
+
+        openSequence = DOTween.Sequence();
+
+        openSequence.OnStart(() =>
+        {
+            if (leftPuppetMove != null) leftPuppetMove.PauseMovement();
+            if (rightPuppetMove != null) rightPuppetMove.PauseMovement();
+        });
+
+        openSequence.Append(
+            LeftCurtain.DOLocalMoveX(openLeft.x, duration / 2).SetEase(Ease.InOutSine));
+        openSequence.Join(
+            RightCurtain.DOLocalMoveX(openRight.x, duration / 2).SetEase(Ease.InOutSine));
+
+        openSequence.Append(
+            LeftCurtain.DOLocalMoveX(closedLeft.x, duration / 2).SetEase(Ease.InOutSine));
+        openSequence.Join(
+            RightCurtain.DOLocalMoveX(closedRight.x, duration / 2).SetEase(Ease.InOutSine));
+
+        openSequence.OnComplete(() =>
+        {
+            if (leftPuppetMove != null) leftPuppetMove.StartMovement();
+            if (rightPuppetMove != null) rightPuppetMove.StartMovement();
+        });
+    }
 }
