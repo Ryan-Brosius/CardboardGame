@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Justice
   cardArt: {fileID: 21300000, guid: 42d0aa1288da8e346b3c36417bc57f5c, type: 3}
-  description: Accept divine punishment
+  description: ACCEPT DIVINE PUNISHMENT
   alwaysLastInDeck: 1
   cannotBeDonated: 1
   donationMultiplier: 1
-  type: 0
+  type: 5
   swordChange: -100
   vulnerableStacks: 0
   cardsToDraw: 0

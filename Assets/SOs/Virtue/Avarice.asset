@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Avarice
   cardArt: {fileID: 21300000, guid: b254c2853e291124db3151dcc3926236, type: 3}
-  description: Hoard your riches. Memento mori
+  description: 'HOARD YOUR RICHES
+
+    MEMENTO MORI'
   alwaysLastInDeck: 0
   cannotBeDonated: 0
   donationMultiplier: 1

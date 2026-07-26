@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Cowardice
   cardArt: {fileID: 21300000, guid: a67f5e6ddb2e8e643a53e3c4ddb81029, type: 3}
-  description: Flee the encounter. Memento mori
+  description: 'FLEE THE ENCOUNTER
+
+    MEMENTO MORI'
   alwaysLastInDeck: 0
   cannotBeDonated: 0
   donationMultiplier: 1
-  type: 0
-  swordChange: -5
+  type: 4
+  swordChange: -10
   vulnerableStacks: 0
   cardsToDraw: 0
