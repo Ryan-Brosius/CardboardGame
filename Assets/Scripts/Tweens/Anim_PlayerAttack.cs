@@ -10,6 +10,7 @@ public class Anim_PlayerAttack : MonoBehaviour
     [SerializeField] private float rotateAngle = -15f;
 
     private Sequence feedbackSequence;
+    private Sequence castSequence;
     public bool IsPlaying => feedbackSequence != null && feedbackSequence.IsActive() && feedbackSequence.IsPlaying();
 
     private void Awake()
@@ -44,7 +45,7 @@ public class Anim_PlayerAttack : MonoBehaviour
         feedbackSequence.Append(
             transform.DOLocalMove(targetLocal, duration).SetEase(Ease.InOutBack));
         feedbackSequence.Join(
-            transform.DOLocalRotate(startRot + new Vector3(0f, 180f, rotateAngle), duration).SetEase(Ease.InOutBack));
+            transform.DOLocalRotate(startRot + new Vector3(0f, 0f, -rotateAngle), duration).SetEase(Ease.InOutBack));
  
         if (onImpact != null)
             feedbackSequence.AppendCallback(() => onImpact());
@@ -61,5 +62,35 @@ public class Anim_PlayerAttack : MonoBehaviour
         });
  
         return feedbackSequence;
+    }
+
+    public void PlayCastSequence()
+    {
+        castSequence?.Kill();
+
+        Vector3 startPos = transform.localPosition;
+        Vector3 startRot = transform.localEulerAngles;
+
+        castSequence = DOTween.Sequence();
+
+        castSequence.OnStart(() =>
+        {
+            if (puppetMovement != null) puppetMovement.PauseMovement();
+        });
+
+        castSequence.Append(
+            transform.DOLocalMoveY(startPos.y + jumpHeight, duration / 2).SetEase(Ease.OutSine));
+        castSequence.Join(
+            transform.DOLocalRotate(startRot + new Vector3(0f, 180f, 0f), duration / 2).SetEase(Ease.OutSine));
+
+        castSequence.Append(
+            transform.DOLocalMove(startPos, duration).SetEase(Ease.InOutSine));
+        castSequence.Join(
+            transform.DOLocalRotate(startRot, duration).SetEase(Ease.InOutSine));
+
+        castSequence.OnComplete(() =>
+        {
+            if (puppetMovement != null) puppetMovement.StartMovement();
+        });
     }
 }

@@ -16,8 +16,9 @@ public class Enemy : MonoBehaviour
     [Header("Events")]
     public UnityEvent<int> onHealthChanged;   
     public UnityEvent<int> onDamaged;
-    public UnityEvent<int> onVulnerableChanged;
+    public UnityEvent<bool> onVulnerableChanged;
     public UnityEvent<bool> onFlyingChanged;
+    public UnityEvent<bool> onImpervousChanged;
     public UnityEvent onDamageNegated;
     public UnityEvent onExhausted;
     public UnityEvent onAttack;               
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
     {
         onHealthChanged.Invoke(Health);
         onFlyingChanged.Invoke(isFlying);
+        onImpervousChanged.Invoke(isImpervious);
     }
 
     public void TakeDamage(int amount)
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour
     {
         if (!IsAlive || stacks <= 0) return;
         VulnerableStacks += stacks;
-        onVulnerableChanged.Invoke(VulnerableStacks);
+        onVulnerableChanged.Invoke(VulnerableStacks > 0);
         UpdateImpervious();
         Debug.Log($"Enemy {enemyName} gained {stacks} vulnerable and now has {VulnerableStacks} vulnerable.");
     }
@@ -89,7 +91,7 @@ public class Enemy : MonoBehaviour
     {
         if (VulnerableStacks <= 0) return;
         VulnerableStacks--;
-        onVulnerableChanged.Invoke(VulnerableStacks);
+        onVulnerableChanged.Invoke(VulnerableStacks > 0);
         Debug.Log($"Enemy {enemyName} lost a vulnerable and now has {VulnerableStacks}.");
     }
 
@@ -136,5 +138,6 @@ public class Enemy : MonoBehaviour
     private void UpdateImpervious()
     {
         if (isImpervious && VulnerableStacks > 0) isImpervious = false;
+        onImpervousChanged.Invoke(isImpervious);
     }
 }

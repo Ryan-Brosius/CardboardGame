@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Hubris
   cardArt: {fileID: 21300000, guid: 180cefb9d7d900248aab6fec6e734c8d, type: 3}
-  description: 'VULNERABLE ENEMIES
-
-    MEMENTO MORI'
+  description: BREAK ALL DEFENSES
   alwaysLastInDeck: 0
   cannotBeDonated: 0
   donationMultiplier: 1
   type: 0
-  swordChange: -10
-  vulnerableStacks: 3
+  swordChange: 0
+  vulnerableStacks: 99
   cardsToDraw: 0

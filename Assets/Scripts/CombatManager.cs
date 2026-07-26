@@ -27,6 +27,8 @@ public class CombatManager : MonoBehaviour
     public UnityEvent<int> onSwordChanged;
     public UnityEvent<int> onScoreChanged;
     public UnityEvent<int> onPlayerDamaged;
+    public UnityEvent<bool> onBlockChanged;
+    public UnityEvent<bool> onDefendChanged;
     public UnityEvent onPlayerBlockedHit;
     public UnityEvent onPlayerTurnStarted;
     public UnityEvent onEnemyTurnStarted;
@@ -151,10 +153,10 @@ public class CombatManager : MonoBehaviour
         {
             foreach (Enemy target in targets)
             {
-                if (!target.IsAlive) continue;
-                DealDamage(target, damage);
                 if (vulnerableStacks > 0)
                     target.ApplyVulnerable(vulnerableStacks);
+                if (!target.IsAlive) continue;
+                DealDamage(target, damage);
             }
             CheckWaveCleared();
         };
@@ -244,6 +246,7 @@ public class CombatManager : MonoBehaviour
         {
             BlockCharges--;
             onPlayerBlockedHit.Invoke();
+            onBlockChanged.Invoke(BlockCharges > 0);
             return;
         }
         if (DefendActive)
@@ -276,14 +279,24 @@ public class CombatManager : MonoBehaviour
         target.TakeDamage(final);
     }
 
-    public void ActivateDefend() => DefendActive = true;
-    public void AddBlockCharge() => BlockCharges++;
+    public void ActivateDefend()
+    {
+        DefendActive = true;
+        onDefendChanged.Invoke(DefendActive);
+    }
+    public void AddBlockCharge()
+    {
+        BlockCharges++;
+        onBlockChanged.Invoke(BlockCharges > 0);
+    }
 
     public void ActivateHubris()
     {
         HubrisActive = true;
         DefendActive = false;
         BlockCharges = 0;
+        onDefendChanged.Invoke(DefendActive);
+        onBlockChanged.Invoke(BlockCharges > 0);
     }
 
     public void ActivateAvarice() => AvariceActive = true;
@@ -367,5 +380,7 @@ public class CombatManager : MonoBehaviour
         BlockCharges = 0;
         DefendActive = false;
         HubrisActive = false;
+        onDefendChanged.Invoke(DefendActive);
+        onBlockChanged.Invoke(BlockCharges > 0);
     }
 }

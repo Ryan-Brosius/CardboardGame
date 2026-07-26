@@ -60,6 +60,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a032a2cf1936c3f4cb5d852870fe34b8, type: 3}
+    - target: {fileID: 2931394833782908407, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2931394833782908407, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936588401019822077, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: activeHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936588401019822077, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: inactiveHeight
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5267771569492167250, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: m_Color.b
       value: 0.18039216
@@ -93,6 +109,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: stamina
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: isFlying
       value: 1
       objectReference: {fileID: 0}
@@ -118,6 +138,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onExhausted.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
@@ -197,6 +221,10 @@ PrefabInstance:
       value: Anim_OnDamage, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onExhausted.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: onFlyingChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Anim_HarpyFlying, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -230,6 +258,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8554611407832550015, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596254530126090026, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201927997148214768, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201927997148214768, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9201927997148214768, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}

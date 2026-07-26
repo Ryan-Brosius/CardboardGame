@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {fileID: 0}
   endPosition: {fileID: 0}
-  dropDuration: 0.25
-  raiseDuration: 0.5
+  dropDuration: 1
+  raiseDuration: 1
   swordMax: 100
 --- !u!1 &2080914270798596154
 GameObject:
