@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -73,8 +74,7 @@ public class Enemy : MonoBehaviour
 
         if (Health == 0)
         {
-            onDied.Invoke();
-            gameObject.SetActive(false);
+            StartCoroutine(DyingSequence());
         }
     }
 
@@ -139,5 +139,12 @@ public class Enemy : MonoBehaviour
     {
         if (isImpervious && VulnerableStacks > 0) isImpervious = false;
         onImpervousChanged.Invoke(isImpervious);
+    }
+
+    private IEnumerator DyingSequence()
+    {
+        onDied.Invoke();
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
     }
 }

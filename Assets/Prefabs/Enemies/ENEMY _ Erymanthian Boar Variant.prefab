@@ -60,6 +60,70 @@ PrefabInstance:
       propertyPath: attackDamage
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4734845896267143056}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3469536836789265636}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 3469536836789265636}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayDeathSequence
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DamageFeedback
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Anim_EnemyAttack, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Anim_OnDamage, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6757618255871178338, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: onDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8554611407832550015, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: m_Name
       value: ENEMY _ Erymanthian Boar Variant
@@ -69,3 +133,25 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+--- !u!114 &3469536836789265636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2410455931945464851, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+  m_PrefabInstance: {fileID: 1249165849443651831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622a01d327b54ed42890b31aeaebdba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4734845896267143056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5827764542001334119, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+  m_PrefabInstance: {fileID: 1249165849443651831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420ef8b5cab9d00489d79ded69a07891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -9,11 +9,18 @@ public class Anim_OnDamage : MonoBehaviour
     [SerializeField] private float moveStrength = 0.2f;
     [SerializeField] private float rotateAngle = 15f;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Color flashColor = Color.red;
+    [SerializeField] private float flashDuration = 0.15f;
+
     private Sequence feedbackSequence;
+    private Color originalColor;
+    private Tween flashTween;
 
     private void Awake()
     {
         if (puppetMovement == null) this.GetComponent<PuppetMovement>();
+        originalColor = spriteRenderer.color;
     }
 
     public void DamageFeedback()
@@ -53,5 +60,14 @@ public class Anim_OnDamage : MonoBehaviour
         });
 
         yield return feedbackSequence.WaitForCompletion();
+    }
+
+    public void Flash()
+    {
+        flashTween?.Kill();
+
+        spriteRenderer.color = flashColor;
+        flashTween = spriteRenderer.DOColor(originalColor, flashDuration)
+            .SetEase(Ease.OutQuad);
     }
 }

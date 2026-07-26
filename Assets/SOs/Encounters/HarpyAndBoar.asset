@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3d524d4da314749a0ec4052972d6f4, type: 3}
   m_Name: HarpyAndBoar
   m_EditorClassIdentifier: 
-  bounty: 180
+  bounty: 200
   spoilsSelections: 3
-  delayBetweenWaves: 0.8
+  delayBetweenWaves: 2
   waves:
   - enemyPrefabs:
-    - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}
     - {fileID: 5517489780008822421, guid: f52c11123ab33e94c80a8b7e099d5fde, type: 3}
+    - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}
+  - enemyPrefabs:
+    - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}
+    - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}

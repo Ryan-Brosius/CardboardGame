@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounty: 240
   spoilsSelections: 3
-  delayBetweenWaves: 0.8
+  delayBetweenWaves: 2
   waves:
   - enemyPrefabs:
     - {fileID: 3892003300353123878, guid: 003b6560d86d4fa41922ff5d2c7134cb, type: 3}

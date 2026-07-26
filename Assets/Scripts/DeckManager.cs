@@ -21,6 +21,7 @@ public class DeckManager : MonoBehaviour
     public IReadOnlyList<CardData> OwnedCards => ownedCards;
     public int DrawPileCount => drawPile.Count;
     public int DiscardPileCount => discardPile.Count;
+    public List<CardData> DrawPile => drawPile;
 
     public bool JudgementSpawned { get; private set; }
 

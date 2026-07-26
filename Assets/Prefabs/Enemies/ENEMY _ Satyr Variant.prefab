@@ -249,6 +249,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8173479754051836882, guid: 6431ffd1ccc22b042a700069a69a3a5b, type: 3}
   m_PrefabInstance: {fileID: 4259991459268762679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6088714395277131247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8025962998040715736, guid: 6431ffd1ccc22b042a700069a69a3a5b, type: 3}
+  m_PrefabInstance: {fileID: 4259991459268762679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3144bb4797f1546bc91b2e3121c4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7282159764303879126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -348,16 +359,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6844305568273175123, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 445863009575363189}
-    - targetCorrespondingSourceObject: {fileID: 6569903487490935125, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7799965421869053929}
   m_SourcePrefab: {fileID: 100100000, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
 --- !u!114 &1557763503431574894 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8111304116059438776, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
   m_PrefabInstance: {fileID: 7282159764303879126}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4477582779768820355}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4abc5a926091109438cf025f67818da8, type: 3}
@@ -411,9 +419,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7799965421869053929}
+        m_TargetAssemblyTypeName: Anim_OnDamage, Assembly-CSharp
+        m_MethodName: Flash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onVulnerableChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6088714395277131247}
+        m_TargetAssemblyTypeName: Anim_DropStatus, Assembly-CSharp
+        m_MethodName: DropStatusIcon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onFlyingChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -443,7 +475,19 @@ MonoBehaviour:
       m_Calls: []
   onDied:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3763589276074621872}
+        m_TargetAssemblyTypeName: Anim_EnemyAttack, Assembly-CSharp
+        m_MethodName: PlayDeathSequence
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   attackAnim: {fileID: 3763589276074621872}
 --- !u!114 &3763589276074621872
 MonoBehaviour:
@@ -462,6 +506,7 @@ MonoBehaviour:
   targetPosition: {fileID: 0}
   jumpHeight: 0
   rotateAngle: 20
+  spriteRenderer: {fileID: 6290789935450123061}
 --- !u!114 &445863009575363189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,29 +523,24 @@ MonoBehaviour:
   puppetMovement: {fileID: 1557763503431574894}
   duration: 0.5
   jumpStrength: 2
---- !u!1 &4477582779768820355 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6569903487490935125, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
-  m_PrefabInstance: {fileID: 7282159764303879126}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7799965421869053929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4477582779768820355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 622a01d327b54ed42890b31aeaebdba2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  puppetMovement: {fileID: 1557763503431574894}
-  duration: 0.25
-  moveStrength: -1.5
-  rotateAngle: 12
 --- !u!4 &5333891721853120899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3389706369711614549, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
   m_PrefabInstance: {fileID: 7282159764303879126}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &6290789935450123061 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3621472052141289699, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+  m_PrefabInstance: {fileID: 7282159764303879126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7799965421869053929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 662141848288767039, guid: ce7a5708a08958245ac1ffc8ff4f4fb7, type: 3}
+  m_PrefabInstance: {fileID: 7282159764303879126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622a01d327b54ed42890b31aeaebdba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounty: 300
   spoilsSelections: 5
-  delayBetweenWaves: 0.8
+  delayBetweenWaves: 2
   waves:
-  - enemyPrefabs:
-    - {fileID: 5517489780008822421, guid: f52c11123ab33e94c80a8b7e099d5fde, type: 3}
   - enemyPrefabs:
     - {fileID: 2886693236896852015, guid: f6928b41b58149746a09618d2e236016, type: 3}
     - {fileID: 3847610935578846019, guid: 409cc60c0586d924fb4b92907236def0, type: 3}
   - enemyPrefabs:
     - {fileID: 5517489780008822421, guid: f52c11123ab33e94c80a8b7e099d5fde, type: 3}
+    - {fileID: 3847610935578846019, guid: 409cc60c0586d924fb4b92907236def0, type: 3}

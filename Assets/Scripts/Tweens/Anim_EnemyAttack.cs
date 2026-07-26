@@ -9,8 +9,10 @@ public class Anim_EnemyAttack : MonoBehaviour
     [SerializeField] private Transform targetPosition;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float rotateAngle = -15f;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Sequence feedbackSequence;
+    private Sequence deathSequence;
     public bool IsPlaying => feedbackSequence != null && feedbackSequence.IsActive() && feedbackSequence.IsPlaying();
 
     private void Awake()
@@ -64,5 +66,27 @@ public class Anim_EnemyAttack : MonoBehaviour
         });
 
         return feedbackSequence;
+    }
+
+    public void PlayDeathSequence()
+    {
+        deathSequence?.Kill();
+
+        deathSequence = DOTween.Sequence();
+
+        deathSequence.OnStart(() =>
+        {
+            if (puppetMovement != null) puppetMovement.PauseMovement();
+        });
+
+        deathSequence.Append(
+            transform.DOLocalMoveY(transform.localPosition.y - 3f, duration * 2).SetEase(Ease.OutSine));
+        deathSequence.Join(
+            spriteRenderer.DOFade(0f, duration * 2).SetEase(Ease.OutSine));
+
+        feedbackSequence.OnComplete(() =>
+        {
+            deathSequence.Kill();
+        });
     }
 }

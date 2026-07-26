@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84cdd73bcab21604c8f6344b6832e29e, type: 3}
-  m_Name: DoubleHarpy
+  m_Name: OliveBoar
   m_EditorClassIdentifier: 
   title: PATH OF OLIVE
-  cardArt: {fileID: 21300000, guid: a032a2cf1936c3f4cb5d852870fe34b8, type: 3}
-  description: '+1 CARD
-
-    +80 BOUNTY'
+  cardArt: {fileID: 21300000, guid: 0797f5e8349d950479f3179453beceb0, type: 3}
+  description: +100 BOUNTY
   alwaysLastInDeck: 0
+  isConclusionCard: 0
   cannotBeDonated: 0
   donationMultiplier: 1
-  encounter: {fileID: 11400000, guid: 3924dde8f4dc1cc40b71e788ec4eeae9, type: 2}
+  encounter: {fileID: 11400000, guid: a1e773d3b6e36f745a1adb8f3ba4e6f6, type: 2}

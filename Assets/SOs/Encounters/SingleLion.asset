@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3d524d4da314749a0ec4052972d6f4, type: 3}
   m_Name: SingleLion
   m_EditorClassIdentifier: 
-  bounty: 100
-  spoilsSelections: 3
-  delayBetweenWaves: 0.8
+  bounty: 160
+  spoilsSelections: 0
+  delayBetweenWaves: 2
   waves:
   - enemyPrefabs:
     - {fileID: 3892003300353123878, guid: 003b6560d86d4fa41922ff5d2c7134cb, type: 3}

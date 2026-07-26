@@ -410,3 +410,6 @@ MonoBehaviour:
   duration: 0.25
   moveStrength: -1.5
   rotateAngle: 12
+  spriteRenderer: {fileID: 2858002607394268008}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.15

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84cdd73bcab21604c8f6344b6832e29e, type: 3}
-  m_Name: BoarAndBuddies
+  m_Name: IronBoar
   m_EditorClassIdentifier: 
   title: PATH OF IRON
   cardArt: {fileID: 21300000, guid: 0797f5e8349d950479f3179453beceb0, type: 3}

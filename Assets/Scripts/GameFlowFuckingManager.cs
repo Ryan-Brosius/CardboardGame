@@ -33,6 +33,7 @@ public class GameFlowFuckingManager : MonoBehaviour
     [Tooltip("Cards that can be offered as rewards.")]
     [SerializeField] private List<ActionCardData> rewardPool = new List<ActionCardData>();
     [SerializeField] private int spoilsChoices = 4;
+    private int numberOfSpoils = 1;
 
     [Header("The Almonry")]
     [Tooltip("'Donate a card to restore balance' sign object.")]
@@ -115,9 +116,15 @@ public class GameFlowFuckingManager : MonoBehaviour
 
     private void StartSpoils()
     {
-        SetPhase(Phase.Spoils);
-        hand.PlayHandler = OnSpoilsCardPlayed;
-        DealRandom(rewardPool, spoilsChoices);
+        if (spoilsChoices > 0)
+        {
+            SetPhase(Phase.Spoils);
+            hand.PlayHandler = OnSpoilsCardPlayed;
+            DealRandom(rewardPool, spoilsChoices);
+            if (spoilsChoices <= 3) numberOfSpoils = 1;
+            else if (spoilsChoices > 3) numberOfSpoils = 2;
+        }
+        else if (spoilsChoices == 0) StartAlmonry();
     }
 
     private bool OnSpoilsCardPlayed(CardData card)
@@ -125,7 +132,12 @@ public class GameFlowFuckingManager : MonoBehaviour
         if (transitioning || CurrentPhase != Phase.Spoils) return false;
 
         deck.AddOwnedCard(card);
-        StartCoroutine(FinishPickThen(StartAlmonry));
+        numberOfSpoils--;
+        
+        if (numberOfSpoils == 0)
+        {
+            StartCoroutine(FinishPickThen(StartAlmonry));
+        }
         return true;
     }
 

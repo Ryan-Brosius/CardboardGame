@@ -159,7 +159,7 @@ public class CombatManager : MonoBehaviour
         if (!action.CanPlay(this)) return false;
 
         action.Play(this);
-        //deck.AddToDiscard(data);
+        deck.AddToDiscard(data);
         return true;
     }
 
@@ -201,7 +201,7 @@ public class CombatManager : MonoBehaviour
         if (!AvariceActive)
         {
             foreach (CardData card in hand.DiscardAllCards())
-                if (!card.isConclusionCard) deck.AddToDiscard(card);
+                if (!card.isConclusionCard) deck.ReturnToBottom(card);
         }
 
         StartCoroutine(EnemyPhase());
@@ -404,7 +404,7 @@ public class CombatManager : MonoBehaviour
     private void CleanUpDeckAfterEncounter()
     {
         foreach (CardData card in hand.DiscardAllCards())
-            deck.ReturnToBottom(card);
+            if (!card.isConclusionCard) deck.ReturnToBottom(card);
         deck.EndEncounter();
         AvariceActive = false;
         BlockCharges = 0;

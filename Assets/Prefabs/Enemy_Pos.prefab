@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5057564776778061391}
   - component: {fileID: 8111304116059438776}
+  - component: {fileID: 662141848288767039}
   m_Layer: 0
   m_Name: Character_Pivot
   m_TagString: Untagged
@@ -52,6 +53,25 @@ MonoBehaviour:
   horizontalSpeed: 0.5
   maxTiltAngle: 2
   tiltSpeed: 1.2
+--- !u!114 &662141848288767039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569903487490935125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622a01d327b54ed42890b31aeaebdba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puppetMovement: {fileID: 8111304116059438776}
+  duration: 0.25
+  moveStrength: -1.5
+  rotateAngle: 12
+  spriteRenderer: {fileID: 3621472052141289699}
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.3
 --- !u!1 &6844305568273175123
 GameObject:
   m_ObjectHideFlags: 0
