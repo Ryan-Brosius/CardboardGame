@@ -13,6 +13,10 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private DeckManager deck;
     [SerializeField] private Transform enemySpawnParent;
     [SerializeField] private List<Transform> enemySpawnPoints = new List<Transform>();
+    [SerializeField] private AudioClip cardShuffleSfx;
+    [SerializeField] private AudioClip cardPlaySfx;
+    [SerializeField] private AudioClip cardDrawSfx;
+    [SerializeField] private AudioClip enemySpawnSfx;
 
     [Header("Player")]
     [SerializeField] private Transform player;
@@ -108,6 +112,7 @@ public class CombatManager : MonoBehaviour
                 enemy.ApplyVulnerable(99);
             }
         }
+        AudioManager.Instance.PlaySFX(enemySpawnSfx, 1, 0.1f);
         onWaveSpawned.Invoke();
     }
 
@@ -149,6 +154,7 @@ public class CombatManager : MonoBehaviour
             //Debug.Log($"{card.name}");
             if (card == null) break;
             hand.AddCard(card);
+            AudioManager.Instance.PlaySFX(cardDrawSfx, 0.8f, 0.2f);
         }
     }
 
@@ -160,6 +166,8 @@ public class CombatManager : MonoBehaviour
 
         action.Play(this);
         deck.AddToDiscard(data);
+        AudioManager.Instance.PlaySFX(cardPlaySfx, 1, 0.2f);
+
         return true;
     }
 

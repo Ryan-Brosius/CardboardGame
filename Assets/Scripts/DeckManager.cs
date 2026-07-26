@@ -10,6 +10,9 @@ public class DeckManager : MonoBehaviour
     [SerializeField] private CardData JusticeCard;
     [SerializeField] private CardData ConclusionCard;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip cardAddedSfx;
+
     public UnityEvent<int> onDrawPileChanged;
     public UnityEvent<int> onDiscardPileChanged;
     public UnityEvent<int> onOwnedCardsChanged;
@@ -43,12 +46,14 @@ public class DeckManager : MonoBehaviour
         if (card == null) return;
         ownedCards.Add(card);
         onOwnedCardsChanged.Invoke(ownedCards.Count);
+        AudioManager.Instance.PlaySFX(cardAddedSfx, 1, 0.1f);
     }
 
     public bool RemoveOwnedCard(CardData card)
     {
         bool removed = ownedCards.Remove(card);
         if (removed) onOwnedCardsChanged.Invoke(ownedCards.Count);
+        AudioManager.Instance.PlaySFX(cardAddedSfx, 1, 0.1f);
         return removed;
     }
 

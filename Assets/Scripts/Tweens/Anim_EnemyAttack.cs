@@ -18,6 +18,7 @@ public class Anim_EnemyAttack : MonoBehaviour
     private void Awake()
     {
         if (puppetMovement == null) this.GetComponent<PuppetMovement>();
+        PlaySpawnSequence();
     }
 
     public Sequence DamageFeedback(Transform target = null, Action onImpact = null)
@@ -83,6 +84,35 @@ public class Anim_EnemyAttack : MonoBehaviour
             transform.DOLocalMoveY(transform.localPosition.y - 3f, duration * 2).SetEase(Ease.OutSine));
         deathSequence.Join(
             spriteRenderer.DOFade(0f, duration * 2).SetEase(Ease.OutSine));
+
+        feedbackSequence.OnComplete(() =>
+        {
+            deathSequence.Kill();
+        });
+    }
+
+    public void PlaySpawnSequence()
+    {
+        if (gameObject.TryGetComponent<Anim_HarpyFlying>(out Anim_HarpyFlying harpyScript))
+        {
+            return;
+        }
+        deathSequence?.Kill();
+
+        deathSequence = DOTween.Sequence();
+
+        transform.position = new Vector3(transform.position.x, transform.position.y -4f, transform.position.z);
+        spriteRenderer.DOFade(0f, 0.01f);
+
+        deathSequence.OnStart(() =>
+        {
+            if (puppetMovement != null) puppetMovement.PauseMovement();
+        });
+
+        deathSequence.Append(
+            transform.DOLocalMoveY(transform.localPosition.y + 4f, duration * 2).SetEase(Ease.OutSine));
+        deathSequence.Join(
+            spriteRenderer.DOFade(1f, duration * 2).SetEase(Ease.OutSine));
 
         feedbackSequence.OnComplete(() =>
         {

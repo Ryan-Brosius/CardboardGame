@@ -504,7 +504,7 @@ MonoBehaviour:
   puppetMovement: {fileID: 1557763503431574894}
   duration: 0.5
   targetPosition: {fileID: 0}
-  jumpHeight: 0
+  jumpHeight: 1
   rotateAngle: 20
   spriteRenderer: {fileID: 6290789935450123061}
 --- !u!114 &445863009575363189

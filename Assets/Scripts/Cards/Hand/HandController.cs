@@ -135,6 +135,7 @@ public class HandController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+#if UNITY_EDITOR
         if (handSettings == null)
             return;
 
@@ -143,5 +144,6 @@ public class HandController : MonoBehaviour
                          (Vector3)handSettings.centerOffset -
                          Vector3.up * handSettings.fanRadius;
         Handles.DrawWireDisc(center, Vector3.forward, handSettings.fanRadius);
+#endif
     }
 }

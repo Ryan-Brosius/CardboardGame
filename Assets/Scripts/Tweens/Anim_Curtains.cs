@@ -8,6 +8,7 @@ public class Anim_Curtains : MonoBehaviour
     [SerializeField] private Vector3 closedLeft;
     [SerializeField] private Vector3 closedRight;
     [SerializeField] private float duration = 1.0f;
+    [SerializeField] private AudioClip curtainSfx;
 
     private Vector3 openLeft;
     private Vector3 openRight;
@@ -49,6 +50,8 @@ public class Anim_Curtains : MonoBehaviour
         openSequence.Join(
             RightCurtain.DOLocalMoveX(openRight.x, duration).SetEase(Ease.InOutSine));
 
+        AudioManager.Instance.PlaySFX(curtainSfx, 1, 0.1f);
+
         openSequence.OnComplete(() =>
         {
             if (leftPuppetMove != null) leftPuppetMove.StartMovement();
@@ -74,6 +77,8 @@ public class Anim_Curtains : MonoBehaviour
         closeSequence.Join(
             RightCurtain.DOLocalMoveX(closedRight.x, duration).SetEase(Ease.InOutSine));
 
+        AudioManager.Instance.PlaySFX(curtainSfx, 1, 0.1f);
+
         closeSequence.OnComplete(() =>
         {
             if (leftPuppetMove != null) leftPuppetMove.StartMovement();
@@ -98,6 +103,8 @@ public class Anim_Curtains : MonoBehaviour
             LeftCurtain.DOLocalMoveX(openLeft.x, duration / 2).SetEase(Ease.InOutSine));
         openSequence.Join(
             RightCurtain.DOLocalMoveX(openRight.x, duration / 2).SetEase(Ease.InOutSine));
+
+        AudioManager.Instance.PlaySFX(curtainSfx, 1, 0.1f);
 
         openSequence.Append(
             LeftCurtain.DOLocalMoveX(closedLeft.x, duration / 2).SetEase(Ease.InOutSine));

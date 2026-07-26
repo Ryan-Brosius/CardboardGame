@@ -172,6 +172,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5827764542001334119, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
+      propertyPath: jumpHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5827764542001334119, guid: 72cafc3f122efc348a4dab712200d5f2, type: 3}
       propertyPath: rotateAngle
       value: -12
       objectReference: {fileID: 0}

@@ -13,6 +13,10 @@ public class Anim_OnDamage : MonoBehaviour
     [SerializeField] private Color flashColor = Color.red;
     [SerializeField] private float flashDuration = 0.15f;
 
+    [Header("Audio References")]
+    [SerializeField] private AudioClip softImpact;
+    [SerializeField] private AudioClip hardImpact;
+
     private Sequence feedbackSequence;
     private Color originalColor;
     private Tween flashTween;
@@ -47,6 +51,8 @@ public class Anim_OnDamage : MonoBehaviour
             transform.DOLocalMoveY(transform.localPosition.y + moveStrength, duration).SetEase(Ease.OutBack));
         feedbackSequence.Join(
             transform.DOLocalRotate(startRot + new Vector3(0f, 0f, rotateAngle), duration).SetEase(Ease.OutBack));
+
+        AudioManager.Instance.PlaySFX(hardImpact, volumeScale: 1.0f, pitchJitter: 0.2f);
 
         // Reset to Position
         feedbackSequence.Append(

@@ -9,16 +9,20 @@ public class Anim_DropStatus : MonoBehaviour
     [SerializeField] private float raiseDuration = 0.5f;
     [SerializeField] private bool startHidden = true;
 
+    [SerializeField] private GameObject statusPivot;
+
     private Tween dropSequence;
 
     private void Awake()
     {
         if (startHidden) ResetStatusPosition();
+        statusPivot.SetActive(false);
     }
 
     public void DropStatusIcon(bool isActive)
     {
         dropSequence?.Kill();
+        statusPivot.SetActive(true);
 
         if (isActive) dropSequence = transform.DOLocalMoveY(activeHeight, dropDuration).SetEase(Ease.OutBounce);
         else if (!isActive) dropSequence = transform.DOLocalMoveY(inactiveHeight, dropDuration).SetEase(Ease.OutBounce);

@@ -8,6 +8,8 @@ public class Anim_PlayerAttack : MonoBehaviour
     [SerializeField] private float duration = 0.5f;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float rotateAngle = -15f;
+    [SerializeField] private AudioClip attackSwooshSfx;
+    [SerializeField] private AudioClip blockTingSfx;
 
     private Sequence feedbackSequence;
     private Sequence castSequence;
@@ -55,7 +57,9 @@ public class Anim_PlayerAttack : MonoBehaviour
             transform.DOLocalMove(startPos, duration * 2).SetEase(Ease.InOutSine));
         feedbackSequence.Join(
             transform.DOLocalRotate(startRot, duration * 2).SetEase(Ease.InOutSine));
- 
+
+        AudioManager.Instance.PlaySFX(attackSwooshSfx, 1, 0.2f);
+
         feedbackSequence.OnComplete(() =>
         {
             if (puppetMovement != null) puppetMovement.StartMovement();
@@ -82,6 +86,8 @@ public class Anim_PlayerAttack : MonoBehaviour
             transform.DOLocalMoveY(startPos.y + jumpHeight, duration / 2).SetEase(Ease.OutSine));
         castSequence.Join(
             transform.DOLocalRotate(startRot + new Vector3(0f, 180f, 0f), duration / 2).SetEase(Ease.OutSine));
+
+        AudioManager.Instance.PlaySFX(blockTingSfx, 1, 0.1f);
 
         castSequence.Append(
             transform.DOLocalMove(startPos, duration).SetEase(Ease.InOutSine));

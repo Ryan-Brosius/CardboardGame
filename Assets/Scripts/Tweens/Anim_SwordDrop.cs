@@ -8,6 +8,7 @@ public class Anim_SwordDrop : MonoBehaviour
     [SerializeField] private float dropDuration = 0.25f;
     [SerializeField] private float raiseDuration = 0.5f;
     [SerializeField] private int swordMax = 100;
+    [SerializeField] private AudioClip swordChainSfx;
 
     private Tween dropSequence;
     private Tween raiseSequence;
@@ -22,6 +23,8 @@ public class Anim_SwordDrop : MonoBehaviour
         dropSequence?.Kill();
 
         dropSequence = transform.DOLocalMove(targetPosition, dropDuration).SetEase(Ease.OutBounce);
+
+        AudioManager.Instance.PlaySFX(swordChainSfx, 1, 0.2f);
     }
 
     private void OnDestroy()

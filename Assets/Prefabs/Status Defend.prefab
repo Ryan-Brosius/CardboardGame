@@ -136,6 +136,8 @@ MonoBehaviour:
   inactiveHeight: 5
   dropDuration: 0.5
   raiseDuration: 0.5
+  startHidden: 1
+  statusPivot: {fileID: 5156089186819116324}
 --- !u!1 &5156089186819116324
 GameObject:
   m_ObjectHideFlags: 0

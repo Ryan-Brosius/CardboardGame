@@ -15,6 +15,7 @@ public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private Image cardArt;
+    [SerializeField] private AudioClip cardHoverSfx;
 
     [Header("Play Zone Hooks")]
     public UnityEvent onEnterPlayZone;
@@ -149,6 +150,7 @@ public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (AnyCardDragging) return;
         hovered = true;
+        AudioManager.Instance.PlaySFX(cardHoverSfx, 0.5f, 0.1f);
         Elevate();
     }
 

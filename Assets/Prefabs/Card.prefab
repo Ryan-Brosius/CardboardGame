@@ -457,6 +457,7 @@ MonoBehaviour:
   titleText: {fileID: 1046992478440559809}
   descriptionText: {fileID: 215963244162067856}
   cardArt: {fileID: 1533187379865989229}
+  cardHoverSfx: {fileID: 8300000, guid: 8547a97b127b62b4da18289ecfcb35c3, type: 3}
   onEnterPlayZone:
     m_PersistentCalls:
       m_Calls: []

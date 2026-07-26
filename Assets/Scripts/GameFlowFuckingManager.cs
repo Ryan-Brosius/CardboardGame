@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,8 @@ public class GameFlowFuckingManager : MonoBehaviour
     [SerializeField] private HandController hand;
     [SerializeField] private DeckManager deck;
     [SerializeField] private CombatManager combat;
+    [SerializeField] private GameObject forestBg;
+    [SerializeField] private GameObject alomnryBg;
 
     [Header("Run")]
     [SerializeField] private EncounterData firstEncounter;
@@ -58,6 +61,9 @@ public class GameFlowFuckingManager : MonoBehaviour
     [Header("Death Scene")]
     [SerializeField] private VideoPlayer deathVideo;
     [SerializeField] private GameObject deathRawImage;
+    [SerializeField] private AudioClip deathSceneSound;
+    [SerializeField] private GameObject GameoverScreen;
+    [SerializeField] private TextMeshProUGUI finalScoreText;
 
     public Phase CurrentPhase { get; private set; }
     private bool transitioning;
@@ -116,6 +122,7 @@ public class GameFlowFuckingManager : MonoBehaviour
 
     private void StartSpoils()
     {
+        StartCoroutine(ToggleBackground());
         if (spoilsChoices > 0)
         {
             SetPhase(Phase.Spoils);
@@ -191,6 +198,7 @@ public class GameFlowFuckingManager : MonoBehaviour
         spoilsChoices = zone.encounter.spoilsSelections;
 
         StartCoroutine(FinishPickThen(() => StartCombat(zone.encounter)));
+        StartCoroutine(ToggleBackground());
         return true;
     }
 
@@ -203,10 +211,19 @@ public class GameFlowFuckingManager : MonoBehaviour
         deathRawImage.SetActive(true);
         deathVideo.gameObject.SetActive(true);
         deathVideo.Play();
+        AudioManager.Instance.PlaySFX(deathSceneSound, 1, 0.1f);
         DOVirtual.DelayedCall((float)deathVideo.length, () =>
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(ActivateGameOverScene());
         });
+    }
+
+    private IEnumerator ActivateGameOverScene()
+    {
+        GameoverScreen.SetActive(true);
+        finalScoreText.text = combat.Score.ToString();
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void DealRandom<T>(List<T> pool, int count) where T : CardData
@@ -239,5 +256,27 @@ public class GameFlowFuckingManager : MonoBehaviour
     {
         yield return new WaitForSeconds(phaseTransitionDelay);
         next();
+    }
+
+    private IEnumerator ToggleBackground()
+    {
+        if (forestBg.activeSelf)
+        {
+            curtains.CloseCurtains();
+            yield return new WaitForSeconds(1.0f);
+            forestBg.SetActive(false);
+            alomnryBg.SetActive(true);
+            curtains.OpenCurtains();
+            yield return new WaitForSeconds(1.0f);
+        }
+        else
+        {
+            curtains.CloseCurtains();
+            yield return new WaitForSeconds(1.0f);
+            forestBg.SetActive(true);
+            alomnryBg.SetActive(false);
+            curtains.OpenCurtains();
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 }
